@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8552d356-b0e3-40eb-a905-d7ccba93aa2c" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="56" column="108" selection-start-line="56" selection-start-column="108" selection-end-line="56" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit4 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>assembly</find>
+      <find>assembl</find>
+      <find>getHeader</find>
+      <find>http</find>
+      <find>auth</find>
+      <find>Ser</find>
+      <find>compan</find>
+      <find>company</find>
+      <find>fehl</find>
+      <find>fehler</find>
+      <find>schw</find>
+      <find>schwi</find>
+      <find>schwit</find>
+      <find>getProductDetails</find>
+      <find>code:</find>
+      <find>authenticate</find>
+      <find>orgatop</find>
+      <find>PULSE_WIDTH_LOOP_COUNT</find>
+      <find>TAG</find>
+      <find>Log.</find>
+      <find>read</find>
+      <find>send</find>
+      <find>log</find>
+      <find>log.</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>gaska</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/test/java/de/orgatop/impl/SearchServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/sample.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/sample_details.html" />
+        <option value="$PROJECT_DIR$/src/main/java/de/orgatop/api/Part.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/input_andere.csv" />
+        <option value="$PROJECT_DIR$/src/main/resources/input_claas.csv" />
+        <option value="$PROJECT_DIR$/src/test/java/de/orgatop/impl/WorkerThreadTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/orgatop/impl/WorkerThread.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/orgatop/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/output_claas.csv" />
+        <option value="$PROJECT_DIR$/output_andere.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/de/orgatop/api/Item.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/orgatop/impl/SearchServiceImpl.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/input_andere.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/gaska/impl/WorkerThreadTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/gaska/api/Item.java" />
+        <option value="$PROJECT_DIR$/target/input_andere.csv" />
+        <option value="$PROJECT_DIR$/target/input_claas.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/de/gaska/api/Part.java" />
+        <option value="$PROJECT_DIR$/input_claas.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/de/gaska/impl/WorkerThread.java" />
+        <option value="$PROJECT_DIR$/delme.inc" />
+        <option value="$PROJECT_DIR$/delme.java" />
+        <option value="$USER_HOME$/Downloads/godot_src/godot/modules/GodotBluetooth/android/src/GodotBluetooth.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/gaska/Main.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="search-tools" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="search-tools" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="24" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="searchtools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="searchtools" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572459141142" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/godot-export-templates-src/GodotBluetooth/GodotBluetooth/android/src/GodotBluetooth.java" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="de.orgatop.impl" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="de.gaska.Main" />
+      <module name="searchtools" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.gaska.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchServiceImplTest.authenticate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="searchtools" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.gaska.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.gaska.impl" />
+      <option name="MAIN_CLASS_NAME" value="de.gaska.impl.SearchServiceImplTest" />
+      <option name="METHOD_NAME" value="authenticate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorkerThreadTest.parseSearchResult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="searchtools" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="de.gaska.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="de.gaska.impl" />
+      <option name="MAIN_CLASS_NAME" value="de.gaska.impl.WorkerThreadTest" />
+      <option name="METHOD_NAME" value="parseSearchResult" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.WorkerThreadTest.parseSearchResult" />
+        <item itemvalue="JUnit.SearchServiceImplTest.authenticate" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8552d356-b0e3-40eb-a905-d7ccba93aa2c" name="Default Changelist" comment="" />
+      <created>1544638320758</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544638320758</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 16h 43m 32s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 16h 43m 54s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 17h 34m 57s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 17h 48m 34s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 18h 08m 57s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 18h 09m 47s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 20h 04m 50s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.14 at 20h 09m 38s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2018.12.18 at 17h 19m 56s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WorkerThreadTest_parseSearchResult - 2019.01.11 at 18h 12m 56s.xml">
+      <configuration name="WorkerThreadTest.parseSearchResult" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-3" y="0" width="1926" height="1052" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26012793" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.32937366" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.29697624" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.40280777" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.39956802" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32937366" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" visible="true" weight="0.23720682" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/impl/WorkerThread.java</url>
+          <line>87</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java</url>
+          <line>58</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/impl/WorkerThread.java</url>
+          <line>51</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java</url>
+          <line>129</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>rows.first().text()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto.substring(0,preisNetto.indexOf(&quot; &quot;))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto.substring(0,5)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto.substring(-5)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto.substring(5)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto.indexOf(&quot; &quot;)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto.substring(preisNetto.indexOf(&quot; &quot;), preisNetto.length()-1)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>preisNetto</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>productDetails</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pom.xml" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/client/methods/HttpPost.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4.jar!/org/apache/http/HttpEntity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/impl/client/MinimalHttpClient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/client/HttpClient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/client/methods/HttpGet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+          <folding>
+            <element signature="e#457#458#0" expanded="true" />
+            <element signature="e#501#502#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/statements/RunAfters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/impl/client/DefaultRedirectStrategy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/client/RedirectStrategy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/impl/client/LaxRedirectStrategy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/impl/client/CloseableHttpClient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="169" column="5" selection-start-line="169" selection-start-column="5" selection-end-line="169" selection-end-column="5" />
+          <folding>
+            <element signature="n#style#0;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#td#0;n#tr#0;n#!!top" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#1;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#td#4;n#tr#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#td#5;n#tr#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#td#5;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#td#6;n#tr#0;n#!!top" />
+            <element signature="n#style#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#td#1;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#td#0;n#tr#1;n#table#0;n#td#1;n#tr#0;n#table#0;n#td#6;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#td#7;n#tr#0;n#!!top" />
+            <element signature="n#style#0;n#td#7;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#7;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#8;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#td#8;n#tr#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="13" column="82" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="82" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#img#0;n#span#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#1;n#div#3;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="688" column="18" selection-start-line="688" selection-start-column="18" selection-end-line="688" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Runnable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/impl/conn/PoolingHttpClientConnectionManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="60" column="11" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
+          <folding>
+            <element signature="e#2605#2606#0" expanded="true" />
+            <element signature="e#2647#2648#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2.jar!/org/apache/http/conn/routing/HttpRoute.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="84" column="11" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/orgatop/impl/MyConnectionSocketFactory.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/orgatop/impl/AuthWorkerThread.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/gaska/impl/SearchServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/api/SearchService.java" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="117" column="31" selection-start-line="117" selection-start-column="31" selection-end-line="117" selection-end-column="31" />
+          <folding>
+            <element signature="n#plugin#1;n#plugins#0;n#build#0;n#project#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_andere.csv" />
+    <entry file="file://$PROJECT_DIR$/output_claas.csv" />
+    <entry file="file://$PROJECT_DIR$/target/input_andere.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/input_claas.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_andere.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/api/Part.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/gaska/impl/WorkerThreadTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/api/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="15" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/impl/WorkerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="130" column="52" selection-start-line="130" selection-start-column="52" selection-end-line="130" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/delme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/sketchbook/libraries/kissStepper/kissStepper.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2235">
+          <caret line="149" selection-start-line="149" selection-end-line="149" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/godot_src/godot/modules/GodotBluetooth/android/src/GodotBluetooth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="96" column="47" selection-start-line="96" selection-start-column="43" selection-end-line="96" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/sketchbook/libraries/kissStepper/kissStepper.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="148" column="47" selection-start-line="148" selection-start-column="25" selection-end-line="148" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_claas.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/godot-export-templates-src/GodotBluetooth/GodotBluetooth/android/src/GodotBluetooth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#GodotBluetooth#0" />
+            <element signature="docComment;method#init#0;class#GodotBluetooth#0" />
+            <element signature="class#1939:4034" />
+            <element signature="method#run#0;class#1939:4034" />
+            <element signature="e#2137#2318#1" />
+            <element signature="e#2376#2605#1" />
+            <element signature="class#2796:4001" />
+            <element signature="method#handleMessage#0;class#2796:4001" />
+            <element signature="e#2963#3953#1" />
+            <element signature="e#3295#3923#1" />
+            <element signature="e#3539#3805#1" />
+            <element signature="docComment;method#getPairedDevices#0;class#GodotBluetooth#0" />
+            <element signature="method#getPairedDevices#0;class#GodotBluetooth#0" />
+            <element signature="e#4248#5362#1" />
+            <element signature="class#4289:5350" />
+            <element signature="method#run#0;class#4289:5350" />
+            <element signature="e#4398#5042#1" />
+            <element signature="e#4432#4837#0" />
+            <element signature="e#4888#5020#0" />
+            <element signature="e#5067#5318#1" />
+            <element signature="e#5110#5190#1" />
+            <element signature="e#5220#5296#1" />
+            <element signature="e#5377#5489#1" />
+            <element signature="docComment;method#nativeLayoutDialogBox#0;class#GodotBluetooth#0" />
+            <element signature="method#nativeLayoutDialogBox#0;class#GodotBluetooth#0" />
+            <element signature="e#5857#6495#1" />
+            <element signature="e#6063#6300#1" />
+            <element signature="class#6690:6892" />
+            <element signature="docComment;method#listPairedDevices#0;class#GodotBluetooth#0" />
+            <element signature="method#listPairedDevices#0;class#GodotBluetooth#0" />
+            <element signature="e#7384#7947#1" />
+            <element signature="e#7556#7896#1" />
+            <element signature="docComment;method#connect#0;class#GodotBluetooth#0" />
+            <element signature="method#connect#0;class#GodotBluetooth#0" />
+            <element signature="e#8162#9297#1" />
+            <element signature="class#8203:9285" />
+            <element signature="method#run#0;class#8203:9285" />
+            <element signature="e#8320#8675#1" />
+            <element signature="e#8704#9249#1" />
+            <element signature="e#8738#9040#0" />
+            <element signature="e#9091#9223#0" />
+            <element signature="e#9311#9423#1" />
+            <element signature="docComment;method#createSocket#0;class#GodotBluetooth#0" />
+            <element signature="method#createSocket#0;class#GodotBluetooth#0" />
+            <element signature="e#9662#10161#0" />
+            <element signature="e#10193#10462#0" />
+            <element signature="docComment;method#sendData#0;class#GodotBluetooth#0" />
+            <element signature="method#sendData#0;class#GodotBluetooth#0" />
+            <element signature="e#10677#11133#1" />
+            <element signature="class#10718:11121" />
+            <element signature="method#run#0;class#10718:11121" />
+            <element signature="e#10835#10920#1" />
+            <element signature="e#10950#11085#1" />
+            <element signature="docComment;method#sendDataBytes#0;class#GodotBluetooth#0" />
+            <element signature="method#sendDataBytes#0;class#GodotBluetooth#0" />
+            <element signature="e#11318#11784#1" />
+            <element signature="class#11359:11772" />
+            <element signature="method#run#0;class#11359:11772" />
+            <element signature="e#11476#11571#1" />
+            <element signature="e#11601#11736#1" />
+            <element signature="docComment;class#ConnectedThread#0;class#GodotBluetooth#0" />
+            <element signature="class#ConnectedThread#0;class#GodotBluetooth#0" />
+            <element signature="method#ConnectedThread#0;class#ConnectedThread#0;class#GodotBluetooth#0" />
+            <element signature="e#12181#12302#0" />
+            <element signature="method#run#0;class#ConnectedThread#0;class#GodotBluetooth#0" />
+            <element signature="e#12580#13221#1" />
+            <element signature="e#12590#13094#0" />
+            <element signature="e#12665#13088#1" />
+            <element signature="e#12753#12781#0" />
+            <element signature="e#12871#13081#1" />
+            <element signature="e#13117#13207#0" />
+            <element signature="method#sendData#0;class#ConnectedThread#0;class#GodotBluetooth#0" />
+            <element signature="e#13356#13418#0" />
+            <element signature="method#sendDataBytes#0;class#ConnectedThread#0;class#GodotBluetooth#0" />
+            <element signature="e#13536#13593#0" />
+            <element signature="docComment;method#onMainActivityResult#0;class#GodotBluetooth#0" />
+            <element signature="method#onMainActivityResult#0;class#GodotBluetooth#0" />
+            <element signature="e#13825#14648#0" />
+            <element signature="e#13933#14048#1" />
+            <element signature="e#14070#14479#1" />
+            <element signature="e#14113#14306#1" />
+            <element signature="e#14331#14461#1" />
+            <element signature="docComment;method#initialize#0;class#GodotBluetooth#0" />
+            <element signature="e#14886#14887#0" expanded="true" />
+            <element signature="e#14939#14940#0" expanded="true" />
+            <element signature="docComment;method#GodotBluetooth#0;class#GodotBluetooth#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/gaska/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="56" column="108" selection-start-line="56" selection-start-column="108" selection-end-line="56" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>searchtools</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
