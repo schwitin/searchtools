@@ -54,7 +54,7 @@ public class Main {
 			}
 
 			try{
-				SearchServiceImpl service = new SearchServiceImpl("IMPEXTRADING", "Sergey Schwitin", "STOP29");
+				SearchServiceImpl service = new SearchServiceImpl("IMPEXTRADING", "Sergey Schwitin", "SSM754");
 				service.authenticate();
 				service.initParts(parts);
 				service.printParts( new FileOutputStream(outputFile), parts);
