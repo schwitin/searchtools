@@ -1,2 +1,5 @@
 target/*
 !*target/gaska.exe
+settings.ini
+.idea/uiDesigner.xml
+.idea/workspace.xml

@@ -1,0 +1,10 @@
+[account]
+partner=
+login=
+password=
+
+[chromedriver]
+version=80.0.3987.106
+headless=true
+
+

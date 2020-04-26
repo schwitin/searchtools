@@ -7,11 +7,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.gaska.impl.SearchServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.gaska.api.Part;
-import de.gaska.impl.SearchServiceImpl;
 
 public class Main {
 
@@ -54,7 +54,7 @@ public class Main {
 			}
 
 			try{
-				SearchServiceImpl service = new SearchServiceImpl("IMPEXTRADING", "Sergey Schwitin", "SSM754");
+				SearchServiceImpl service = new SearchServiceImpl();
 				service.authenticate();
 				service.initParts(parts);
 				service.printParts( new FileOutputStream(outputFile), parts);
