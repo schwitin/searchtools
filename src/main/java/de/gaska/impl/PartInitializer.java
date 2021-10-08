@@ -11,9 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PartInitializer {
 
@@ -29,7 +27,9 @@ public class PartInitializer {
 
     public void initPart(final Part part) {
         logger.info("Suche: " + part.getPartNr());
-        final String targetStr = String.format("https://www.b2b.gaska.com.pl/de/k/alle-produkte-0?q=%s", part.getPartNr());
+        final String partNr = part.getPartNr();
+        final String queryString = partNr.substring(0, partNr.length() - part.getSubstringLastCharsFromPartNrWhileSearch());
+        final String targetStr = String.format("https://www.b2b.gaska.com.pl/de/k/alle-produkte-0?q=%s", queryString);
         driver.get(targetStr);
         parseSearchResult(part);
     }
@@ -69,28 +69,11 @@ public class PartInitializer {
             item.setVerpackungseinheit(verpackungseinheit);
             items.add(item);
             i++;
-            if (i >= 5) {
-                break;
-            }
-        }
-        return items;
-    }
-
-    private Map<String, String> getUrlsToDetailPagesToPartNuberMap() {
-        final List<WebElement> rows = driver.findElements(By.className("prd-row"));
-        final Map<String, String> urlsToDetails = new HashMap<>();
-        int i = 0;
-        for (final WebElement row : rows) {
-            final WebElement linkToDetails = row.findElement(By.className("stretched-link"));
-            final String urlToDetails = linkToDetails.getAttribute("href");
-            final String partNr = row.getAttribute("data-code");
-            urlsToDetails.put(urlToDetails, partNr);
-            i++;
             if (i >= 10) {
                 break;
             }
         }
-        return urlsToDetails;
+        return items;
     }
 
     private String getPartName() {

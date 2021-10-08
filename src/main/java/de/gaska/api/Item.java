@@ -10,7 +10,6 @@ public class Item {
     String verpackungseinheit = "";
     String urlToDetails;
 
-
     Part part;
 
     public Item(final String itemNumber, final String urlToDetails) {
@@ -19,7 +18,11 @@ public class Item {
     }
 
     public String getOemNummern() {
-        return oemNummern;
+        return oemNummern
+                .replace("\n", " ")
+                .replace("\r", " ")
+                .replace("  ", " ")
+                .trim();
     }
 
     public void setOemNummern(final String oemNummern) {
@@ -27,7 +30,11 @@ public class Item {
     }
 
     public String getItemNumber() {
-        return itemNumber;
+        return itemNumber
+                .replace("\n", " ")
+                .replace("\r", " ")
+                .replace("  ", " ")
+                .trim();
     }
 
     public void setItemNumber(final String itemNumber) {
@@ -35,7 +42,11 @@ public class Item {
     }
 
     public String getName() {
-        return name;
+        return name
+                .replace("\n", " ")
+                .replace("\r", " ")
+                .replace("  ", " ")
+                .trim();
     }
 
     public void setName(final String name) {
@@ -43,7 +54,12 @@ public class Item {
     }
 
     public String getPriceNetto() {
-        return priceNetto.replace("EUR", "").trim();
+        return priceNetto
+                .replace("EUR", "")
+                .replace("\n", " ")
+                .replace("\r", " ")
+                .replace("  ", " ")
+                .trim();
     }
 
     public void setPriceNetto(final String priceNetto) {
@@ -51,7 +67,17 @@ public class Item {
     }
 
     public String getVerfuegbarkeit() {
-        return verfuegbarkeit.replace(",00", "").replace("Stk.", " Stk.");
+        return verfuegbarkeit
+                .replace(",00000", "")
+                .replace(",0000", "")
+                .replace(",000", "")
+                .replace(",00", "")
+                .replace(",0", "")
+                .replace("Stk.", " Stk.")
+                .replace("\n", " ")
+                .replace("\r", " ")
+                .replace("  ", " ")
+                .trim();
     }
 
     public void setVerfuegbarkeit(final String verfuegbarkeit) {
@@ -59,7 +85,16 @@ public class Item {
     }
 
     public String getVerpackungseinheit() {
-        return verpackungseinheit;
+        return verpackungseinheit
+                .replace(",00000", "")
+                .replace(",0000", "")
+                .replace(",000", "")
+                .replace(",00", "")
+                .replace(",0", "")
+                .replace("\n", " ")
+                .replace("\r", " ")
+                .replace("  ", " ")
+                .trim();
     }
 
     public void setVerpackungseinheit(final String verpackungseinheit) {
@@ -77,6 +112,7 @@ public class Item {
     public void setUrlToDetails(final String urlToDetails) {
         this.urlToDetails = urlToDetails;
     }
+
 
     @Override
     public String toString() {

@@ -8,6 +8,7 @@ public class Part {
     String partNr;
     String partName;
     String partBedarfsmaenge;
+    int substringLastCharsFromPartNrWhileSearch = 0;
 
 
     List<Item> otherItems = new ArrayList<>();
@@ -31,6 +32,13 @@ public class Part {
         return partBedarfsmaenge;
     }
 
+    public int getSubstringLastCharsFromPartNrWhileSearch() {
+        return substringLastCharsFromPartNrWhileSearch;
+    }
+
+    public void setSubstringLastCharsFromPartNrWhileSearch(final int substringLastCharsFromPartNrWhileSearch) {
+        this.substringLastCharsFromPartNrWhileSearch = substringLastCharsFromPartNrWhileSearch;
+    }
 
     public void setOtherItems(final List<Item> otherItems) {
         this.otherItems = otherItems;

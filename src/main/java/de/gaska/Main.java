@@ -49,13 +49,14 @@ public class Main {
                     id++;
                     continue;
                 }
-                String partNr = record.get(0);
-                if (inputFileName.contains("claas")) {
-                    partNr = partNr.substring(0, partNr.length() - 1);
-                }
+                final String partNr = record.get(0);
                 final String partName = record.get(1);
                 final String partBedarfsmaenge = record.get(2);
-                parts.add(new Part("" + id++, partNr, partName, partBedarfsmaenge));
+                final Part part = new Part("" + id++, partNr, partName, partBedarfsmaenge);
+                if (inputFileName.contains("claas")) {
+                    part.setSubstringLastCharsFromPartNrWhileSearch(1);
+                }
+                parts.add(part);
             }
             try {
                 final SearchServiceImpl service = new SearchServiceImpl();
