@@ -49,7 +49,10 @@ public class Main {
                     id++;
                     continue;
                 }
-                final String partNr = record.get(0);
+                String partNr = record.get(0);
+                if (inputFileName.contains("claas")) {
+                    partNr = partNr.substring(0, partNr.length() - 1);
+                }
                 final String partName = record.get(1);
                 final String partBedarfsmaenge = record.get(2);
                 parts.add(new Part("" + id++, partNr, partName, partBedarfsmaenge));
