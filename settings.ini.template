@@ -3,8 +3,8 @@ partner=
 login=
 password=
 
-[chromedriver]
-version=80.0.3987.106
+[chrome]
+version=90
 headless=true
 
 

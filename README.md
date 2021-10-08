@@ -13,15 +13,10 @@
 
 - переименовать settings.ini.template на settings.ini
 - в settings.ini внести данные аккаунта в секции [account]
-- в settings.ini внести версию драйвера Crome в секции [chromedriver]:
-
-80.0.3987.106 для версии 80
-
-81.0.4044.69 для версии 81
-
-83.0.4103.14 для версии 83
-
-* запустить gaska.exe с коммандной строки
+- в settings.ini внести версию драйвера Crome в секции [chrome]:
+    - version -- версия chrome
+    - headless -- непоказывать окно chrome
+- запустить gaska.exe с коммандной строки
 
 
  

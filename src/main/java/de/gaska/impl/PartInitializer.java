@@ -2,109 +2,150 @@ package de.gaska.impl;
 
 import de.gaska.api.Item;
 import de.gaska.api.Part;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class PartInitializer {
 
-	private Logger logger = LoggerFactory.getLogger(PartInitializer.class);
+    private final Logger logger = LoggerFactory.getLogger(PartInitializer.class);
 
-	private WebDriver driver;
-	//private Part part;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
-	public PartInitializer(WebDriver driver) {
-		//this.part = part;
-		this.driver = driver;
-	}
+    public PartInitializer(final WebDriver driver) {
+        this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
 
+    public void initPart(final Part part) {
+        logger.info("Suche: " + part.getPartNr());
+        final String targetStr = String.format("https://www.b2b.gaska.com.pl/de/k/alle-produkte-0?q=%s", part.getPartNr());
+        driver.get(targetStr);
+        parseSearchResult(part);
+    }
 
-	public void initPart(Part part) {
+    private void parseSearchResult(final Part part) {
+        final Map<String, String> urlsToDetailPagesToPartNuberMap = getUrlsToDetailPagesToPartNuberMap();
 
-		logger.info("Suche: " + part.getPartNr());
+        for (final String urlToDetails : urlsToDetailPagesToPartNuberMap.keySet()) {
+            logger.info("-----------------------");
 
-		String targetStr = String.format("https://www.gaska.com.pl/towary/?szukajFrazy=%s", part.getPartNr());
-		driver.get(targetStr);
-		parseSearchResult(part, driver.getPageSource());
-	}
+            final String partNr = urlsToDetailPagesToPartNuberMap.get(urlToDetails);
+            logger.info("Part Nr: " + partNr);
+            driver.get(urlToDetails);
+            final String partName = this.getPartName();
+            final String preisNetto = this.getPreisNetto();
+            final String verfuegbarkeit = this.getVerfuegbarkeit();
+            final String oemNummern = this.getOemNummer(part);
 
-	private void parseSearchResult(Part part, String responseStr) {
-		logger.info("Parse: " + part.getPartNr());
+            final Item otherItem = new Item(partNr);
+            otherItem.setName(partName);
+            otherItem.setPriceNetto(preisNetto);
+            otherItem.setVerfuegbarkeit(verfuegbarkeit);
+            otherItem.setOemNummern(oemNummern);
+            part.addOtherItem(otherItem);
+        }
 
-		Document doc = Jsoup.parse(responseStr);
-		logger.debug(doc.toString());
-		for (int i = 0; i <= 9; i++){
-			Elements rows = doc.select(String.format("tr[id=ContentPlaceHolder1_tTowary_gvTowary_DXDataRow%s]", i));
-			if(rows.size() < 1) {
-				break;
-			} else{
-				Element row = rows.first();
-				Document produktdetails = getProductDetails(row);
-				String partNr = getPartNr(row);
+    }
 
-				Item otherItem = new Item(partNr);
-				otherItem.setName(getPartName(row));
-				otherItem.setPriceNetto(getPreisNetto(produktdetails));
-				otherItem.setVerfuegbarkeit(getVerfuegbarkeit(produktdetails));
-				otherItem.setOemNummern(getOemNummer(part, produktdetails));
-				part.addOtherItem(otherItem);
-			}
-		}
-		logger.info(part.toString());
-	}
+    private Map<String, String> getUrlsToDetailPagesToPartNuberMap() {
+        final List<WebElement> rows = driver.findElements(By.className("prd-row"));
+        final Map<String, String> urlsToDetails = new HashMap<>();
+        for (final WebElement row : rows) {
+            final WebElement linkToDetails = row.findElement(By.className("stretched-link"));
+            final String urlToDetails = linkToDetails.getAttribute("href");
+            final String partNr = row.getAttribute("data-code");
+            urlsToDetails.put(urlToDetails, partNr);
+        }
+        return urlsToDetails;
+    }
 
-	private Document getProductDetails(Element row){
-		Elements cols = row.select("td:nth-child(2)");
-		String url = cols.first().child(0).attr("href").replace("..", "");
-		driver.get("https://www.gaska.com.pl" + url);
-		String responseStr = driver.getPageSource();
-		return Jsoup.parse(responseStr);
-	}
+    private String getPartName() {
+        try {
+            final String partName = driver.findElement(By.className("prd-v")).findElement(By.cssSelector("h1.name")).getText();
+            logger.info("Bezeichnung: " + partName);
+            return partName;
+        } catch (final Exception e) {
+            logger.warn("Bezeichnung konnte nicht ermittelt werden.");
+            logger.debug(driver.getPageSource());
+            return "";
+        }
 
-	private String getPartNr(Element row) {
-		Elements cols = row.select("td:nth-child(3)");
-		return cols.first().text();
-	}
+    }
 
-	private String getPartName(Element row) {
-		Elements cols = row.select("td:nth-child(2)");
-		return cols.first().text();
-	}
+    private String getPreisNetto() {
+        try {
+            wait.until(d -> d.findElement(By.cssSelector("img.price-img")));
+            driver.findElement(By.cssSelector("img.price-img")).click(); // Preis anzeigen
+            wait.until(d -> d.findElement(By.cssSelector("div.price-hurt")).findElement(By.tagName("strong")).isDisplayed());
+            final String preisNetto = driver.findElement(By.cssSelector("div.price-hurt")).findElement(By.tagName("strong")).getText();
+            logger.info("Preis Netto: " + preisNetto);
+            return preisNetto;
+        } catch (final Exception e) {
+            logger.warn("Preis Netto konnte nicht ermittelt werden.");
+            logger.debug(driver.getPageSource());
+            return "";
+        }
+    }
 
-	private String getPreisNetto(Document productDetails){
-		Elements rows =  productDetails.select("div[id=ContentPlaceHolder1_pProdukt_divCenaNetto]")
-				.select("span[id=ContentPlaceHolder1_pProdukt_lCena]");
-		String preisNetto = rows.first().text();
-		preisNetto = preisNetto.substring(0,preisNetto.indexOf(" "));
-		return preisNetto;
-	}
+    private String getOemNummer(final Part part) {
+        try {
+            wait.until(d -> d.findElement(By.cssSelector("button[data-target=\"#numeryZamienneInfo\"]")));
+            driver.findElement(By.cssSelector("button[data-target=\"#numeryZamienneInfo\"]")).click(); // oemNummern anzeigen
+            wait.until(d -> d.findElement(By.cssSelector("button[data-target=\"#numeryZamienneInfo\"]")));
+            final String oemNummern = driver.findElement(By.id("numeryZamienneInfo")).findElement(By.className("card-body")).getText();
 
-	private String getOemNummer(Part part, Document productDetails){
-		StringBuilder ret = new StringBuilder();
-		String oemNummern = "";
-		Elements rows =  productDetails.select("span[id=ContentPlaceHolder1_pProdukt_lNumeryZamienne]");
-		if(rows.size() > 0) oemNummern = rows.first().text();
-		String[] splitted = oemNummern.split("(,|\\s)");
+            final String[] splitted = oemNummern.split("(,|\\s)");
 
-		for (String oemNummer : splitted){
-			if (oemNummer.contains(part.getPartNr())){
-				ret.append(oemNummer.trim());
-				ret.append(",");
-			}
-		}
-		return ret.toString();
-	}
+            final StringBuilder ret = new StringBuilder();
+            for (final String oemNummer : splitted) {
+                if (oemNummer.contains(part.getPartNr())) {
+                    ret.append(oemNummer.trim());
+                    ret.append(",");
+                }
+            }
+            logger.info("OEM Nummern: " + ret.toString());
+            return ret.toString();
+        } catch (final Exception e) {
+            logger.warn("OEM Nummern konnten nicht ermittelt werden.");
+            logger.debug(driver.getPageSource());
+            return "";
+        }
+    }
 
-	private String getVerfuegbarkeit(Document productDetails){
-		Elements rows = productDetails.select("span[id=ContentPlaceHolder1_pProdukt_lDostepnosc]");
-		String verfuegbarkeit = rows.first().text();
-		if("vorhanden".equals(verfuegbarkeit)){
-			verfuegbarkeit = "+";
-		}
-		return verfuegbarkeit;
-	}
+    private String getVerpackungseinheit() {
+        try {
+            final String verpackungseiheit = "";
+            logger.info("Verpackungseiheit: " + verpackungseiheit);
+            return verpackungseiheit;
+        } catch (final Exception e) {
+            logger.warn("Verpackungseiheit konnte nicht ermittelt werden.");
+            logger.debug(driver.getPageSource());
+            return "";
+        }
+    }
+
+    private String getVerfuegbarkeit() {
+        try {
+            wait.until(d -> d.findElement(By.cssSelector("img.stock-img")));
+            driver.findElement(By.cssSelector("img.stock-img")).click(); // Verfügbarkeit anzeigen
+            wait.until(d -> d.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")));
+            final String verfuegbarkeit = driver.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")).getText();
+            logger.info("Verfuegbarkeit: " + verfuegbarkeit);
+            return verfuegbarkeit;
+        } catch (final Exception e) {
+            logger.warn("Verfügbarkeit konnte nicht ermittelt werden.");
+            logger.debug(driver.getPageSource());
+            return "";
+        }
+    }
 }

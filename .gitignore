@@ -1,5 +1,7 @@
 target/*
 !*target/gaska.exe
 settings.ini
+output_andere.csv
+output_claas.csv
 .idea/uiDesigner.xml
 .idea/workspace.xml

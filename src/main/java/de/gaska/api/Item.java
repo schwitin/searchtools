@@ -7,6 +7,7 @@ public class Item {
 	String priceNetto="";
 	String verfuegbarkeit ="";
 	String oemNummern ="";
+	String verpackungseinheit = "";
 	
 	public Item(String itemNumber){
 		this.itemNumber = itemNumber;
@@ -43,6 +44,14 @@ public class Item {
 		this.verfuegbarkeit = verfuegbarkeit;
 	}
 
+	public String getVerpackungseinheit() {
+		return verpackungseinheit;
+	}
+
+	public void setVerpackungseinheit(String verpackungseinheit) {
+		this.verpackungseinheit = verpackungseinheit;
+	}
+
 	@Override
 	public String toString() {
 	    StringBuilder str = new StringBuilder();
@@ -54,12 +63,14 @@ public class Item {
 	    str.append(";");
 	    str.append(this.priceNetto);
 		str.append(";");
+		str.append(this.verpackungseinheit);
+		str.append(";");
 		str.append(this.oemNummern);
 	    return str.toString();
 	}
 	
 	public static String getHeader(){
-		return "Id;Gesucht;ArtikelNr;Bezeichnung;Verfuegbarkeit;Preis Netto;OEM Nummern";
+		return "Id;Gesucht Art.Nr.;Gaska Art.Nr.;Bezeichnung;Verfuegbarkeit, St;Großhandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
 	}
 	
 }

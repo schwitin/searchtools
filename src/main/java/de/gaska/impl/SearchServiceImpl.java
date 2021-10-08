@@ -19,89 +19,86 @@ import java.util.prefs.Preferences;
 
 public class SearchServiceImpl implements Closeable {
 
-	private Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
-	private String login;
-	private String password;
-	private String partner;
+    private final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
+    private final String login;
+    private final String password;
+    private final String partner;
 
-	private WebDriver driver;
+    private final WebDriver driver;
 
-	public SearchServiceImpl() throws IOException {
-
-
-		String settingsFilePath = System.getProperty("settings");
-
-		Ini ini = new Ini(new File(settingsFilePath));
-		Preferences prefs = new IniPreferences(ini);
-
-		this.partner = prefs.node("account").get("partner", null);
-		this.login = prefs.node("account").get("login", null);
-		this.password = prefs.node("account").get("password", null);
-		WebDriverManager.chromedriver().version(prefs.node("chromedriver").get("version", "80.0.3987.106")).setup();
+    public SearchServiceImpl() throws IOException {
 
 
-		ChromeOptions chromeOptions = new ChromeOptions();
+        final String settingsFilePath = System.getProperty("settings");
 
-		if(prefs.node("chromedriver").get("headless", "true").equals("true")){
-			chromeOptions.addArguments("--headless");
-		}
-		driver = new ChromeDriver(chromeOptions);
-	}
+        final Ini ini = new Ini(new File(settingsFilePath));
+        final Preferences prefs = new IniPreferences(ini);
 
-	public void initParts(List<Part> parts) {
-		PartInitializer partInitializer = new PartInitializer(driver);
+        this.partner = prefs.node("account").get("partner", null);
+        this.login = prefs.node("account").get("login", null);
+        this.password = prefs.node("account").get("password", null);
+        WebDriverManager.chromedriver().browserVersion(prefs.node("chrome").get("version", "90")).setup();
 
-		int i = 0;
-		for (Part part : parts) {
-			String partNr = part.getPartNr();
-			if ("?".equals(partNr)) {
-				continue;
-			}
-			String message = String.format("Verarbeite %s: %s/%s", part.getPartNr(), ++i, parts.size());
-			logger.info(message);
-			partInitializer.initPart(part);
+        final ChromeOptions chromeOptions = new ChromeOptions();
 
-		}
+        if (prefs.node("chrome").get("headless", "true").equals("true")) {
+            chromeOptions.addArguments("--headless");
+        }
+        driver = new ChromeDriver(chromeOptions);
+    }
 
+    public void initParts(final List<Part> parts) {
+        final PartInitializer partInitializer = new PartInitializer(driver);
 
-		logger.info("Erledigt");
-	}
+        int i = 0;
+        for (final Part part : parts) {
+            final String partNr = part.getPartNr();
+            if ("?".equals(partNr)) {
+                continue;
+            }
+            final String message = String.format("Verarbeite %s: %s/%s", part.getPartNr(), ++i, parts.size());
+            logger.info(message);
+            partInitializer.initPart(part);
 
-
-	public void printParts(OutputStream outputStream, List<Part> parts){
-		try (PrintStream printStream = new PrintStream(outputStream)) {
-			printStream.println(getHeader(parts));
-			for (Part part : parts) {
-				printStream.println(part);
-			}
-		}
-	}
-
-	
+        }
 
 
-	public void authenticate()  {
-
-		driver.get("https://www.gaska.com.pl/zaloguj/partner");
-		WebElement firma = driver.findElement(By.id("Akronim_I"));
-		WebElement userName = driver.findElement(By.id("UserName_I"));
-		WebElement password = driver.findElement(By.id("Password_I"));
-		WebElement loginButton = driver.findElement(By.id("LoginButton2_CD"));
-
-		firma.sendKeys(this.partner);
-		userName.sendKeys(this.login);
-		password.sendKeys(this.password);
-		// Thread.sleep(10000);
-		loginButton.click();
-	}
+        logger.info("Erledigt");
+    }
 
 
-	private String getHeader(List<Part> parts){
-		return Item.getHeader();
-	}
+    public void printParts(final OutputStream outputStream, final List<Part> parts) {
+        try (final PrintStream printStream = new PrintStream(outputStream)) {
+            printStream.println(getHeader(parts));
+            for (final Part part : parts) {
+                printStream.println(part);
+            }
+        }
+    }
 
-	@Override
-	public void close() throws IOException {
-		driver.close();
-	}
+
+    public void authenticate() {
+
+        driver.get("https://www.b2b.gaska.com.pl/de/konto/login");
+        final WebElement firma = driver.findElement(By.id("Akronim"));
+        final WebElement userName = driver.findElement(By.id("Person"));
+        final WebElement password = driver.findElement(By.id("Password"));
+        final WebElement loginButton = driver.findElement(By.className("btn-primary"));
+
+        firma.sendKeys(this.partner);
+        userName.sendKeys(this.login);
+        password.sendKeys(this.password);
+        // Thread.sleep(10000);
+        loginButton.click();
+    }
+
+
+    private String getHeader(final List<Part> parts) {
+        return Item.getHeader();
+    }
+
+    @Override
+    public void close() throws IOException {
+        driver.close();
+    }
 }

@@ -30,6 +30,7 @@ public class SearchServiceImplTest {
     public void initParts() {
         List<Part> parts = new ArrayList<>();
         Part part = new Part("myPartId", "1003143.01");
+        // Part part = new Part("myPartId", "85030");
         parts.add(part);
         unitUnderTest.authenticate();
         unitUnderTest.initParts(parts);
