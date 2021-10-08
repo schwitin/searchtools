@@ -86,7 +86,7 @@ public class PartInitializer {
             final String partNr = row.getAttribute("data-code");
             urlsToDetails.put(urlToDetails, partNr);
             i++;
-            if (i >= 5) {
+            if (i >= 10) {
                 break;
             }
         }

@@ -51,7 +51,7 @@ public class Item {
     }
 
     public String getVerfuegbarkeit() {
-        return verfuegbarkeit.replace(",00", "");
+        return verfuegbarkeit.replace(",00", "").replace("Stk.", " Stk.");
     }
 
     public void setVerfuegbarkeit(final String verfuegbarkeit) {
@@ -83,7 +83,7 @@ public class Item {
         final StringBuilder str = new StringBuilder();
         str.append(this.getItemNumber());
         str.append(";");
-        str.append(this.part.getPartName());
+        str.append(this.part.getPartName()); // Bezechnung IMPEX
         str.append(";");
         str.append(this.getName());
         str.append(";");
@@ -100,7 +100,7 @@ public class Item {
     }
 
     public static String getHeader() {
-        return "Pos. Nr.;Gesucht Art.Nr.;Bezeichnung IMPEX;Gaska Art.Nr.;Bezeichnung GASKA;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Grosshandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
+        return "Pos. Nr.;Gesucht Art.Nr.;Gaska Art.Nr.;Bezeichnung IMPEX;Bezeichnung GASKA;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Grosshandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
     }
 
 }
