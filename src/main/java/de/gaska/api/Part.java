@@ -4,49 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Part {
-	String id;
-	String partNr;
+    String id;
+    String partNr;
+    String partName;
+    String partBedarfsmaenge;
 
-	List<Item> otherItems = new ArrayList<>();
-	public Part(String id, String partNr){
-		this.id = id;
-		this.partNr = partNr;
-	}
 
-	public String getPartNr() {
-		return partNr;
-	}
+    List<Item> otherItems = new ArrayList<>();
 
-	public void addOtherItem(Item item){
-		this.otherItems.add(item);
-	}
-	
-	public List<Item> getOtherItems() {
-		return otherItems;
-	}
+    public Part(final String id, final String partNr, final String partName, final String partBedarfsmaenge) {
+        this.id = id;
+        this.partNr = partNr.equals("-") ? "?" : partNr;
+        this.partName = partName;
+        this.partBedarfsmaenge = partBedarfsmaenge;
+    }
 
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(this.id);
-		buffer.append(";");
-		buffer.append(this.partNr);
+    public String getPartNr() {
+        return partNr;
+    }
 
-		int i = 0;
-		for (Item item : otherItems) {
+    public String getPartName() {
+        return partName;
+    }
 
-			if(i == 0)
-	        	buffer.append(";" + item );
-			else
-				buffer.append(";;" + item );
+    public String getPartBedarfsmaenge() {
+        return partBedarfsmaenge;
+    }
 
-	        if(i != otherItems.size() -1) {
-				buffer.append(System.getProperty("line.separator"));
-			}
-	        i++;
+
+    public void setOtherItems(final List<Item> otherItems) {
+        this.otherItems = otherItems;
+        this.otherItems.forEach(i -> i.setPart(this));
+    }
+
+    public List<Item> getOtherItems() {
+        return otherItems;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer buffer = new StringBuffer();
+        buffer.append(this.id);
+        buffer.append(";");
+        buffer.append(this.partNr);
+
+        int i = 0;
+        for (final Item item : otherItems) {
+
+            if (i == 0)
+                buffer.append(";" + item);
+            else
+                buffer.append(";;" + item);
+
+            if (i != otherItems.size() - 1) {
+                buffer.append(System.getProperty("line.separator"));
+            }
+            i++;
 
         }
 
-	    return buffer.toString();
-	}
+        return buffer.toString();
+    }
 }

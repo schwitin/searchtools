@@ -5,7 +5,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,8 @@ public class SearchServiceImplTest {
 
     @Test
     public void initParts() {
-        List<Part> parts = new ArrayList<>();
-        Part part = new Part("myPartId", "1003143.01");
+        final List<Part> parts = new ArrayList<>();
+        final Part part = new Part("myPartId", "1003143.01", "My_Name", "10");
         // Part part = new Part("myPartId", "85030");
         parts.add(part);
         unitUnderTest.authenticate();

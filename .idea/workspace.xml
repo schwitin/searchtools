@@ -5,24 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8552d356-b0e3-40eb-a905-d7ccba93aa2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_andere.csv" beforeDir="false" afterPath="$PROJECT_DIR$/input_andere.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_claas.csv" beforeDir="false" afterPath="$PROJECT_DIR$/input_claas.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.ini.template" beforeDir="false" afterPath="$PROJECT_DIR$/settings.ini.template" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/gaska/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/gaska/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/gaska/api/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/gaska/api/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/gaska/api/Part.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/gaska/api/Part.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/gaska/impl/PartInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/gaska/impl/PartInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sample.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sample_details.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/de/gaska/impl/SearchServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/gaska/impl/SearchServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/gaska.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/gaska.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,6 +318,14 @@
       <option name="presentableId" value="Default" />
       <updated>1544638320758</updated>
     </task>
+    <task id="LOCAL-00001" summary="support for the new website">
+      <created>1633675042958</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1633675042958</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -405,18 +404,27 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="support for the new website" />
+    <option name="LAST_COMMIT_MESSAGE" value="support for the new website" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/gaska/impl/PartInitializer.java</url>
-          <line>126</line>
+          <line>150</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/impl/SearchServiceImpl.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="63" />
+          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/api/Part.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/gaska/Main.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

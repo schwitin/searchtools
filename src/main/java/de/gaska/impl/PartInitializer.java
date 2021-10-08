@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,37 +35,60 @@ public class PartInitializer {
     }
 
     private void parseSearchResult(final Part part) {
-        final Map<String, String> urlsToDetailPagesToPartNuberMap = getUrlsToDetailPagesToPartNuberMap();
+        part.setOtherItems(this.initializeItems());
 
-        for (final String urlToDetails : urlsToDetailPagesToPartNuberMap.keySet()) {
+        for (final Item item : part.getOtherItems()) {
+
             logger.info("-----------------------");
 
-            final String partNr = urlsToDetailPagesToPartNuberMap.get(urlToDetails);
-            logger.info("Part Nr: " + partNr);
-            driver.get(urlToDetails);
+            logger.info("Part Nr: " + item.getItemNumber());
+            logger.info("Verpackungseinheit: " + item.getVerpackungseinheit());
+            driver.get(item.getUrlToDetails());
             final String partName = this.getPartName();
             final String preisNetto = this.getPreisNetto();
             final String verfuegbarkeit = this.getVerfuegbarkeit();
             final String oemNummern = this.getOemNummer(part);
-
-            final Item otherItem = new Item(partNr);
-            otherItem.setName(partName);
-            otherItem.setPriceNetto(preisNetto);
-            otherItem.setVerfuegbarkeit(verfuegbarkeit);
-            otherItem.setOemNummern(oemNummern);
-            part.addOtherItem(otherItem);
+            item.setName(partName);
+            item.setPriceNetto(preisNetto);
+            item.setVerfuegbarkeit(verfuegbarkeit);
+            item.setOemNummern(oemNummern);
         }
 
+    }
+
+    private List<Item> initializeItems() {
+        final List<WebElement> rows = driver.findElements(By.className("prd-row"));
+        final List<Item> items = new ArrayList<>();
+        int i = 0;
+        for (final WebElement row : rows) {
+            final WebElement linkToDetails = row.findElement(By.className("stretched-link"));
+            final String urlToDetails = linkToDetails.getAttribute("href");
+            final String partNr = row.getAttribute("data-code");
+            final String verpackungseinheit = row.findElement(By.className("t-package")).findElement(By.className("text-sm-center")).getText();
+            final Item item = new Item(partNr, urlToDetails);
+            item.setVerpackungseinheit(verpackungseinheit);
+            items.add(item);
+            i++;
+            if (i >= 5) {
+                break;
+            }
+        }
+        return items;
     }
 
     private Map<String, String> getUrlsToDetailPagesToPartNuberMap() {
         final List<WebElement> rows = driver.findElements(By.className("prd-row"));
         final Map<String, String> urlsToDetails = new HashMap<>();
+        int i = 0;
         for (final WebElement row : rows) {
             final WebElement linkToDetails = row.findElement(By.className("stretched-link"));
             final String urlToDetails = linkToDetails.getAttribute("href");
             final String partNr = row.getAttribute("data-code");
             urlsToDetails.put(urlToDetails, partNr);
+            i++;
+            if (i >= 5) {
+                break;
+            }
         }
         return urlsToDetails;
     }
@@ -139,13 +163,23 @@ public class PartInitializer {
             wait.until(d -> d.findElement(By.cssSelector("img.stock-img")));
             driver.findElement(By.cssSelector("img.stock-img")).click(); // Verfügbarkeit anzeigen
             wait.until(d -> d.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")));
-            final String verfuegbarkeit = driver.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")).getText();
+            String verfuegbarkeit = driver.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")).getText();
+            verfuegbarkeit = this.shouldAddPlusToVerfuegbarkeit() ? "+" + verfuegbarkeit : verfuegbarkeit;
             logger.info("Verfuegbarkeit: " + verfuegbarkeit);
             return verfuegbarkeit;
         } catch (final Exception e) {
             logger.warn("Verfügbarkeit konnte nicht ermittelt werden.");
             logger.debug(driver.getPageSource());
             return "";
+        }
+    }
+
+    private boolean shouldAddPlusToVerfuegbarkeit() {
+        try {
+            driver.findElement(By.cssSelector("div.stock-cont")).findElement(By.cssSelector("span.fa-plus")).getText();
+            return true;
+        } catch (final Exception e) {
+            return false;
         }
     }
 }
