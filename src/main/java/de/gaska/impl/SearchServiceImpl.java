@@ -31,7 +31,7 @@ public class SearchServiceImpl implements Closeable {
 
         final String settingsFilePath = System.getProperty("settings");
 
-        final Ini ini = new Ini(new File(settingsFilePath));
+        final Ini ini = new Ini(new File(settingsFilePath == null ? "settings.ini" : settingsFilePath));
         final Preferences prefs = new IniPreferences(ini);
 
         this.partner = prefs.node("account").get("partner", null);
@@ -98,7 +98,8 @@ public class SearchServiceImpl implements Closeable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         driver.close();
+        driver.quit();
     }
 }

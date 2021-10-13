@@ -30,9 +30,6 @@
             <version>1.9.0</version>
         </dependency>
 
-        <!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId>
-            <version>1.7.21</version> </dependency> -->
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -81,7 +78,7 @@
                                 <preCp>anything</preCp>
                             </classPath>
                             <jre>
-                                <minVersion>1.7.0</minVersion>
+                                <minVersion>1.8.0</minVersion>
                                 <opts>
                                     <opt>-Djava.endorsed.dirs=./endorsed</opt>
                                     <opt>-Dsettings=settings.ini</opt>
@@ -123,8 +120,6 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version>
-
-
                 <executions>
                     <execution>
                         <id>jar-with-dependencies</id>
@@ -150,7 +145,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
