@@ -1,7 +1,10 @@
 target/*
 !*target/gaska.exe
+!*target/orgatop.exe
 settings.ini
 output_andere.csv
 output_claas.csv
+output.csv
+.~lock*
 .idea/uiDesigner.xml
 .idea/workspace.xml

@@ -1,5 +1,9 @@
-[account]
+[account_gaska]
 partner=
+login=
+password=
+
+[account_orgatop]
 login=
 password=
 

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>de.gaska</groupId>
+    <groupId>de.impl.gaska</groupId>
     <artifactId>search-tools</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
@@ -62,7 +62,7 @@
                 <version>2.1.2</version>
                 <executions>
                     <execution>
-                        <id>l4j-clui</id>
+                        <id>gaska</id>
                         <phase>package</phase>
                         <goals>
                             <goal>launch4j</goal>
@@ -70,10 +70,10 @@
                         <configuration>
                             <headerType>console</headerType>
                             <outfile>target/gaska.exe</outfile>
-                            <jar>target/gaska.jar</jar>
+                            <jar>target/search-tools.jar</jar>
                             <errTitle>gaska</errTitle>
                             <classPath>
-                                <mainClass>de.gaska.Main</mainClass>
+                                <mainClass>de.impl.gaska.Main</mainClass>
                                 <addDependencies>true</addDependencies>
                                 <preCp>anything</preCp>
                             </classPath>
@@ -94,6 +94,42 @@
                                 <productName>gaska-search-tools</productName>
                                 <internalName>gaska-search-tools</internalName>
                                 <originalFilename>gaska.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>orgatop</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>console</headerType>
+                            <outfile>target/orgatop.exe</outfile>
+                            <jar>target/search-tools.jar</jar>
+                            <errTitle>orgatop</errTitle>
+                            <classPath>
+                                <mainClass>de.impl.orgatop.Main</mainClass>
+                                <addDependencies>true</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>1.8.0</minVersion>
+                                <opts>
+                                    <opt>-Djava.endorsed.dirs=./endorsed</opt>
+                                    <opt>-Dsettings=settings.ini</opt>
+                                </opts>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>2.0.0.0</fileVersion>
+                                <txtFileVersion>txt file version?</txtFileVersion>
+                                <fileDescription>a description</fileDescription>
+                                <copyright>my copyright</copyright>
+                                <productVersion>2.0.0.0</productVersion>
+                                <txtProductVersion>txt product version</txtProductVersion>
+                                <productName>orgatop-search-tools</productName>
+                                <internalName>orgatop-search-tools</internalName>
+                                <originalFilename>orgatop.exe</originalFilename>
                             </versionInfo>
                         </configuration>
                     </execution>
@@ -128,11 +164,11 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>gaska</finalName>
+                            <finalName>search-tools</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <archive>
                                 <manifest>
-                                    <mainClass>de.gaska.Main</mainClass>
+                                    <mainClass>de.impl.gaska.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
