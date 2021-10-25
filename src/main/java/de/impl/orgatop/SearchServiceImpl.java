@@ -52,6 +52,6 @@ public class SearchServiceImpl extends SearchServiceBase {
 
     @Override
     public String getHeader() {
-        return super.getHeader().replace("Gaska", "Orgatop");
+        return super.getHeader().replace("Gaska", "Menke").replace("OEM Nummern (Ersatz-Nr.)", "Orgatop Art.Nr");
     }
 }

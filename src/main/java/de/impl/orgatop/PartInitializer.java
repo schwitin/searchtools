@@ -31,8 +31,8 @@ public class PartInitializer extends PartInitializerBase {
             parseSearchResult(part);
         } else if (isOnDetails()) {
             final Item i = new Item("", null);
-            initializeDetailsForItem(i);
             i.setPart(part);
+            initializeDetailsForItem(i);
             part.getOtherItems().add(i);
         } else {
             logger.warn("Keine Ergebnisse zu {}", part.getPartNr());
@@ -65,10 +65,10 @@ public class PartInitializer extends PartInitializerBase {
     }
 
     private void parseSearchResult(final Part part) {
-        part.setOtherItems(this.initializeItems());
+        part.setOtherItems(this.initializeItems(part));
     }
 
-    private List<Item> initializeItems() {
+    private List<Item> initializeItems(final Part part) {
         final List<WebElement> rows = driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.xpath("tr"));
         final List<Item> items = new ArrayList<>();
         int i = 0;
@@ -79,6 +79,7 @@ public class PartInitializer extends PartInitializerBase {
                 continue;
             }
             final Item item = initializeItemFromResultRow(columns);
+            item.setPart(part);
             items.add(item);
             if (++i >= MAX_ITEMS_TO_INITIALIZE) {
                 break;
@@ -127,10 +128,11 @@ public class PartInitializer extends PartInitializerBase {
     }
 
     private void initializeDetailsForItem(final Item item) {
-        item.setVerfuegbarkeit(getVerfügbarkeitFromDetails());
+        item.setVerfuegbarkeit(getVerfügbarkeitFromDetails(item));
         item.setPriceNetto(getPreisNettoFromDetails());
         item.setVerpackungseinheit(getVerpackungseinheitFromDetails());
         item.setItemNumber(getArtikelnummerFromDetails());
+        item.setOemNummern(getOrgatopNummerFromDetails());
         item.setName(getBezeichnungFromDetails());
 
         logger.info("----------Details zu {} -------------", item.getItemNumber());
@@ -182,22 +184,20 @@ public class PartInitializer extends PartInitializerBase {
         }
     }
 
-    private String getVerfügbarkeitFromDetails() {
+    private String getVerfügbarkeitFromDetails(final Item item) {
         try {
+            final String bedarfsmaenge = item.getPart().getPartBedarfsmaenge();
+            if (bedarfsmaenge != null) {
+                final WebElement mengeInput = driver.findElement(By.id("properties")).findElement(By.name("quantity"));
+                mengeInput.sendKeys(bedarfsmaenge);
+            }
+
             driver.findElement(By.id("properties")).findElement(By.cssSelector("[alt=\"Verfügbarkeit\"]")).click();
 
-            final String xpath = "//div[contains(@style,'availabilityGreen.png')] | //div[contains(@style,'availabilityYellow.png')] | //note[contains(@style,'availabilityRed.png')]";
+            final String xpath = "//div[contains(@style,'availabilityGreen.png')] | //div[contains(@style,'availabilityYellow.png')] | //div[contains(@style,'availabilityGreenYellow.png')] | //div[contains(@style,'availabilityRed.png')]";
             wait.until(d -> d.findElement(By.id("properties")).findElement(By.xpath(xpath)));
-            final String verfuegbarkeitStr = driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).getAttribute("style");
-            if (verfuegbarkeitStr.contains("Green")) {
-                return "grün";
-            } else if (verfuegbarkeitStr.contains("Yellow")) {
-                return "gelb";
-            } else if (verfuegbarkeitStr.contains("Red")) {
-                return "rot";
-            } else {
-                return "unbekannt";
-            }
+            final String verfuegbarkeitStr = driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).getAttribute("title");
+            return verfuegbarkeitStr;
         } catch (final Exception e) {
             logger.warn("Verfügbarkeit konnte nicht ermittelt werden");
             return "unbekannt";
@@ -229,6 +229,16 @@ public class PartInitializer extends PartInitializerBase {
             return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).findElement(By.className("Text")).getText();
         } catch (final Exception e) {
             logger.warn("Artikelnummer konnte nicht ermittelt werden");
+            return "";
+        }
+    }
+
+    private String getOrgatopNummerFromDetails() {
+        try {
+            final String xpath = "//*[contains(@class, 'ListLabel') and normalize-space(text())=\"ORGAtop\"]/parent::tr";
+            return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).findElement(By.className("ListText")).getText();
+        } catch (final Exception e) {
+            logger.warn("Orgatop Nummer konnte nicht ermittelt werden");
             return "";
         }
     }

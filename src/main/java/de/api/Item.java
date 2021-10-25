@@ -10,11 +10,16 @@ public class Item {
     String verpackungseinheit = "";
     String urlToDetails;
 
+
     Part part;
 
     public Item(final String itemNumber, final String urlToDetails) {
         this.itemNumber = itemNumber;
         this.urlToDetails = urlToDetails;
+    }
+
+    public Part getPart() {
+        return part;
     }
 
     public String getOemNummern() {
