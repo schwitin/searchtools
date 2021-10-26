@@ -7,7 +7,7 @@
 
 [orgatop.exe](https://github.com/schwitin/searchtools/raw/master/target/orgatop.exe)
 
-[input.csv](https://raw.githubusercontent.com/schwitin/searchtools/master/input_andere.csv) -- Input für orgatop.exe
+[input.csv](https://raw.githubusercontent.com/schwitin/searchtools/master/input.csv) -- Input für orgatop.exe
 
 [input_andere.csv](https://raw.githubusercontent.com/schwitin/searchtools/master/input_andere.csv) -- Input für
 gaska.exe
