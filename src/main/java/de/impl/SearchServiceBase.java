@@ -34,6 +34,13 @@ public abstract class SearchServiceBase implements Closeable, de.api.SearchServi
 
         if (prefs.node("chrome").get("headless", "true").equals("true")) {
             chromeOptions.addArguments("--headless");
+            chromeOptions.addArguments("--window-size=1920,1080");
+            chromeOptions.addArguments("--disable-extensions");
+            chromeOptions.addArguments("--start-maximized");
+            chromeOptions.addArguments("--disable-gpu");
+            chromeOptions.addArguments("--disable-dev-shm-usage");
+            chromeOptions.addArguments("--no-sandbox");
+            chromeOptions.addArguments("--ignore-certificate-errors");
         }
         driver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
