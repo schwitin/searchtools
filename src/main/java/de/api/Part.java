@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Part {
     String id = "";
+
+
     String partNr = "";
     String partName = "";
     String partBedarfsmaenge = "";
@@ -15,13 +17,17 @@ public class Part {
 
     public Part(final String id, final String partNr, final String partName, final String partBedarfsmaenge) {
         this.id = id;
-        this.partNr = partNr.equals("-") ? "?" : partNr;
+        this.partNr = partNr;
         this.partName = partName;
         this.partBedarfsmaenge = partBedarfsmaenge;
     }
 
     public String getPartNr() {
         return partNr;
+    }
+
+    public void setPartNr(final String partNr) {
+        this.partNr = partNr;
     }
 
     public String getPartName() {

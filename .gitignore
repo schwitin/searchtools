@@ -2,6 +2,7 @@ target/*
 !*target/gaska.exe
 !*target/orgatop.exe
 settings.ini
+logfile.txt
 output_andere.csv
 output_claas.csv
 output.csv

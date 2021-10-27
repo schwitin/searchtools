@@ -51,7 +51,8 @@ public abstract class SearchServiceBase implements Closeable, de.api.SearchServi
         int i = 0;
         for (final Part part : parts) {
             final String partNr = part.getPartNr();
-            if ("?".equals(partNr)) {
+            if ("".equals(partNr) || "-".equals(partNr)) {
+                part.setPartNr("Keine Art. eingegeben!");
                 continue;
             }
             final String message = String.format("Verarbeite %s: %s/%s", part.getPartNr(), ++i, parts.size());

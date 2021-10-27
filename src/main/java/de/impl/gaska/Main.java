@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -21,14 +22,11 @@ public class Main {
             final File inputFile = new File(inputFileName);
             if (!inputFile.exists()) {
                 logger.error("Datei {} existiert nicht.", inputFile.getAbsolutePath());
+                waitForEnterBeforeExit();
                 return;
             }
 
             final File outputFile = new File(inputFileName.replace("input_", "output_"));
-            if (outputFile.exists()) {
-                logger.error("Datei {} existiert bereits.%n", outputFile.getAbsolutePath());
-                return;
-            }
 
             try {
                 final CsvImporter csvImporter = new CsvImporter();
@@ -41,5 +39,11 @@ public class Main {
                 logger.error("Fehler :( ", e);
             }
         }
+        waitForEnterBeforeExit();
+    }
+
+    private static void waitForEnterBeforeExit() throws IOException {
+        System.out.println("Bitte 2 Mal ENTER eingeben um das Programm zu beenden.");
+        System.in.read();
     }
 }
