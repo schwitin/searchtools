@@ -28,10 +28,9 @@ public class Main {
 
             final File outputFile = new File(inputFileName.replace("input_", "output_"));
 
-            try {
+            try (final SearchServiceImpl service = new SearchServiceImpl()) {
                 final CsvImporter csvImporter = new CsvImporter();
                 final List<Part> parts = csvImporter.importCsv(inputFile);
-                final SearchServiceImpl service = new SearchServiceImpl();
                 service.authenticate();
                 service.initParts(parts);
                 service.printParts(new FileOutputStream(outputFile), parts);
