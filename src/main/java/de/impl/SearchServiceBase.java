@@ -41,6 +41,7 @@ public abstract class SearchServiceBase implements Closeable, de.api.SearchServi
             chromeOptions.addArguments("--disable-dev-shm-usage");
             chromeOptions.addArguments("--no-sandbox");
             chromeOptions.addArguments("--ignore-certificate-errors");
+            chromeOptions.addArguments("--remote-allow-origins=*");
         }
         driver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));

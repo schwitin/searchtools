@@ -30,12 +30,12 @@ public class SearchServiceImplTest {
     @Test
     public void initParts() throws IOException {
         final List<Part> parts = new ArrayList<>();
-        final Part part = new Part("myPartId", "1003143.01", "My_Name", "10");
+        final Part part = new Part("myPartId", "2118260", "My_Name", "10");
         // Part part = new Part("myPartId", "85030");
         parts.add(part);
         unitUnderTest.authenticate();
         unitUnderTest.initParts(parts);
         assertNotNull(part);
-        assertEquals(1, part.getOtherItems().size());
+        assertEquals(2, part.getOtherItems().size());
     }
 }
