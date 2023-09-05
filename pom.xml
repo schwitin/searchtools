@@ -78,11 +78,9 @@
                                 <preCp>anything</preCp>
                             </classPath>
                             <jre>
-                                <path>JRE path (%VAR%)</path>
+                                <path>%HKEY_LOCAL_MACHINE\SOFTWARE\UnusualJavaVendor\JavaHome%;%JAVA_HOME%;%PATH%</path>
                                 <minVersion>1.8.0</minVersion>
-
                                 <opts>
-                                    <opt>-Djava.endorsed.dirs=./endorsed</opt>
                                     <opt>-Dsettings=settings.ini</opt>
                                 </opts>
                             </jre>
@@ -119,7 +117,6 @@
                                 <path>%HKEY_LOCAL_MACHINE\SOFTWARE\UnusualJavaVendor\JavaHome%;%JAVA_HOME%;%PATH%</path>
                                 <minVersion>1.8.0</minVersion>
                                 <opts>
-                                    <opt>-Djava.endorsed.dirs=./endorsed</opt>
                                     <opt>-Dsettings=settings.ini</opt>
                                 </opts>
                             </jre>
