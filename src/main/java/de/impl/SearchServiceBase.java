@@ -28,7 +28,7 @@ public abstract class SearchServiceBase implements Closeable, de.api.SearchServi
         final String settingsFilePath = System.getProperty("settings");
         final Ini ini = new Ini(new File(settingsFilePath == null ? "settings.ini" : settingsFilePath));
         final Preferences prefs = new IniPreferences(ini);
-        WebDriverManager.chromedriver().browserVersion(prefs.node("chrome").get("version", "90")).setup();
+        WebDriverManager.chromedriver().browserVersion(prefs.node("chrome").get("version", "126")).setup();
 
         final ChromeOptions chromeOptions = new ChromeOptions();
 
