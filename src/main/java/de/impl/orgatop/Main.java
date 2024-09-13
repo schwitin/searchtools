@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 public class Main {
@@ -28,7 +28,7 @@ public class Main {
             final List<Part> parts = csvImporter.importCsv(inputFile);
             service.authenticate();
             service.initParts(parts);
-            service.printParts(new FileOutputStream(outputFile), parts);
+            service.render(Files.newOutputStream(outputFile.toPath()), parts);
         } catch (final Exception e) {
             logger.error("Fehler :( ", e);
         } finally {

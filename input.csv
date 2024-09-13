@@ -1,15 +1,20 @@
-Gesucht Art.Nr.;Bezeichnung IMPEX;Bedarfsmenge IMPEX
-Z102299        ;Bez              ;10
-2147690        ;SECHSKANTSCHRAUBE;448
-2118260        ;INNENRING        ;12
-9718941        ;LAGERFLANSCH     ;16
-6158910        ;HOLZLEISTE       ;6
-               ;                 ;
-6305700        ;GLEITSCHIENE     ;4
-85510          ;BUCHSE           ;4
--              ;                 ;
-5557680        ;WENDETROMMELBLECH;6
-009349350      ;Bez              ;10
-200310621      ;Bez              ;10
-9303450        ;Kein Ergebnis    ;10
-9103250        ;Kein Ergebnis    ;10
+Gesucht Art.Nr.	;Bezeichnung IMPEX				;Bedarfsmenge IMPEX
+Z102299        	;Bez              				;10
+-              	;                 				;
+009349350      	;Bez              				;10
+200310621      	;Bez              				;10
+9303450        	;Kein Ergebnis    				;10
+9103250        	;Kein Ergebnis    				;10
+915881		   	;ABTRIEBSWELLE    				;10
+DD491			;Sechskantschraube				;10
+959334			;FEDERZINKEN 1A.LI. (02)		;10
+959335			;FEDERZINKEN 1A.RE. (02/K3)		;10
+ED156			;Federverschlussglied			;10
+971681			;Lagerungseinheit				;10
+ED151			;ROLLENKETTE 606 08B-1 57		;10
+ED056			;ROLLENKETTE I127 105 GLIE		;10
+ED084			;ROL-KET I127 71GL				;10
+ED101			;ROLLENKETTE I127 65 GLIED		;10
+ED161			;ROLLENKETTE I127 27 GLIED		;10
+ED168			;ROL-KET I127 101GL1			;10
+DF036			;Scheibe 10,5x30x2,5			;10

@@ -33,7 +33,7 @@ public class Main {
                 final List<Part> parts = csvImporter.importCsv(inputFile);
                 service.authenticate();
                 service.initParts(parts);
-                service.printParts(new FileOutputStream(outputFile), parts);
+                service.render(new FileOutputStream(outputFile), parts);
             } catch (final Exception e) {
                 logger.error("Fehler :( ", e);
             }

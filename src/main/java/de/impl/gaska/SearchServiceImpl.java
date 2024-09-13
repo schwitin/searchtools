@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.prefs.Preferences;
 
@@ -50,9 +52,18 @@ public class SearchServiceImpl extends SearchServiceBase {
         loginButton.click();
     }
 
+    @Override
+    public void render(final OutputStream outputStream, final List<Part> parts){
+        try (final PrintStream printStream = new PrintStream(outputStream)) {
+            printStream.println(getHeader());
+            for (final Part part : parts) {
+                printStream.println(part);
+            }
+        }
+    }
 
-    private String getHeader(final List<Part> parts) {
-        return Item.getHeader();
+    private String getHeader() {
+        return "Pos. Nr.;Gesucht Art.Nr.;Gaska Art.Nr.;Bezeichnung IMPEX;Bezeichnung Gaska;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Grosshandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
     }
 
     @Override

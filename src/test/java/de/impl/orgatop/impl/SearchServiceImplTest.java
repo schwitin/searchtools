@@ -12,7 +12,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
-public class SearchServiceImplTest {
+public class
+SearchServiceImplTest {
     SearchServiceImpl unitUnderTest;
 
     @Before
@@ -33,7 +34,8 @@ public class SearchServiceImplTest {
         // 009349350
         // 200310621
         // 9303450 9103250 kein Ergebnis
-        final Part part = new Part("myPartId", "9303450", "My_Name", "10");
+        // 2147690 mit detail
+        final Part part = new Part("myPartId", "2147690", "My_Name", "10");
         // Part part = new Part("myPartId", "85030");
         parts.add(part);
         unitUnderTest.authenticate();

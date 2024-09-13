@@ -1,5 +1,7 @@
 package de.impl.orgatop;
 
+import de.api.Item;
+import de.api.Part;
 import de.impl.PartInitializerBase;
 import de.impl.SearchServiceBase;
 import org.ini4j.Ini;
@@ -11,16 +13,18 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.List;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
-public class SearchServiceImpl extends SearchServiceBase {
+public class SearchServiceImpl extends SearchServiceBase{
     Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
-
 
     public SearchServiceImpl() throws IOException {
         super();
     }
-
 
     @Override
     public void authenticate() throws IOException {
@@ -51,7 +55,44 @@ public class SearchServiceImpl extends SearchServiceBase {
     }
 
     @Override
-    public String getHeader() {
-        return super.getHeader().replace("Gaska", "Menke").replace("OEM Nummern (Ersatz-Nr.)", "Orgatop Art.Nr");
+    public void render(final OutputStream outputStream, final List<Part> parts) {
+        try (final PrintStream printStream = new PrintStream(outputStream)) {
+            printStream.println(getHeader());
+            parts.stream().map(this::mapToCsvRow).filter(Objects::nonNull).forEach(printStream::println);
+        }
+    }
+
+    private String mapToCsvRow(Part part){
+        Item original = part.getOtherItems().stream().filter(item -> item.getItemNumber().equals(part.getPartNr())).findFirst().orElse(null);
+        Item compatible = part.getOtherItems().stream().filter(item -> item.getItemNumber().equals(part.getPartNr() + "M")).findFirst().orElse(null);
+        if (original == null && compatible == null) {
+            return null;
+        }else {
+            return mapToCsvColumns(original) + mapToCsvColumns(compatible);
+        }
+
+    }
+
+    private String mapToCsvColumns(Item item){
+        if (item == null) {
+            return ";;;;";
+        }else{
+            StringBuilder result = new StringBuilder();
+            result.append(item.getItemNumber())
+                    .append(";")
+                    .append(item.getName())
+                    .append(";")
+                    .append(item.getPriceBrutto())
+                    .append(";")
+                    .append(item.getPriceNetto())
+                    .append(";")
+                    .append(item.getGewicht())
+                    .append(";");
+            return result.toString();
+        }
+    }
+
+    private String getHeader() {
+        return "Art.Nr.;Bezeichnung;Preis Brutto;Preis Netto;Gewicht;M-Art.Nr;Bezeichnung;Preis Brutto;Preis Netto;Gewicht";
     }
 }

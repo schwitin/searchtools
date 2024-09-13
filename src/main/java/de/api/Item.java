@@ -5,9 +5,11 @@ public class Item {
     String itemNumber = "";
     String name = "";
     String priceNetto = "";
+    String priceBrutto = "";
     String verfuegbarkeit = "";
     String oemNummern = "";
     String verpackungseinheit = "";
+    String gewicht = "";
     String urlToDetails;
 
 
@@ -51,6 +53,7 @@ public class Item {
                 .replace("\n", " ")
                 .replace("\r", " ")
                 .replace("  ", " ")
+                .replace("\"", "''")
                 .trim();
     }
 
@@ -69,6 +72,14 @@ public class Item {
 
     public void setPriceNetto(final String priceNetto) {
         this.priceNetto = priceNetto;
+    }
+
+    public String getPriceBrutto() {
+        return priceBrutto;
+    }
+
+    public void setPriceBrutto(String priceBrutto) {
+        this.priceBrutto = priceBrutto;
     }
 
     public String getVerfuegbarkeit() {
@@ -108,6 +119,14 @@ public class Item {
 
     public void setPart(final Part part) {
         this.part = part;
+    }
+
+    public String getGewicht() {
+        return gewicht;
+    }
+
+    public void setGewicht(String gewicht) {
+        this.gewicht = gewicht;
     }
 
     public String getUrlToDetails() {

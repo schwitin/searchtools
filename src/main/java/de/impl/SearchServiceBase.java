@@ -2,6 +2,7 @@ package de.impl;
 
 import de.api.Item;
 import de.api.Part;
+import de.api.Renderer;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
@@ -17,7 +18,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-public abstract class SearchServiceBase implements Closeable, de.api.SearchService {
+public abstract class SearchServiceBase implements Closeable, de.api.SearchService, Renderer {
 
     private final Logger logger = LoggerFactory.getLogger(SearchServiceBase.class);
     protected final WebDriver driver;
@@ -66,23 +67,7 @@ public abstract class SearchServiceBase implements Closeable, de.api.SearchServi
         logger.info("Erledigt");
     }
 
-
-    public void printParts(final OutputStream outputStream, final List<Part> parts) {
-        try (final PrintStream printStream = new PrintStream(outputStream)) {
-            printStream.println(getHeader());
-            for (final Part part : parts) {
-                printStream.println(part);
-            }
-        }
-    }
-
-
     public abstract void authenticate() throws IOException;
-
-
-    public String getHeader() {
-        return Item.getHeader();
-    }
 
     @Override
     public void close() {

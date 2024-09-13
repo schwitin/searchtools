@@ -130,15 +130,19 @@ public class PartInitializer extends PartInitializerBase {
     private void initializeDetailsForItem(final Item item) {
         item.setVerfuegbarkeit(getVerfügbarkeitFromDetails(item));
         item.setPriceNetto(getPreisNettoFromDetails());
+        item.setPriceBrutto(getPreisBruttoFromDetails());
         item.setVerpackungseinheit(getVerpackungseinheitFromDetails());
         item.setItemNumber(getArtikelnummerFromDetails());
         item.setOemNummern(getOrgatopNummerFromDetails());
         item.setName(getBezeichnungFromDetails());
+        item.setGewicht(getGewichtFromDetails());
 
         logger.info("----------Details zu {} -------------", item.getItemNumber());
         logger.info("Bezeichnung: " + item.getName());
         logger.info("Verfügbarkeit: " + item.getVerfuegbarkeit());
         logger.info("Preis Netto: " + item.getPriceNetto());
+        logger.info("Preis Brutto: " + item.getPriceBrutto());
+        logger.info("Gewicht: " + item.getGewicht());
         logger.info("Verpackungseinheit: " + item.getVerpackungseinheit());
     }
 
@@ -213,12 +217,31 @@ public class PartInitializer extends PartInitializerBase {
         }
     }
 
+    private String getPreisBruttoFromDetails() {
+        try {
+            return driver.findElement(By.id("properties")).findElement(By.className("ListDimension")).getText();
+        } catch (final Exception e) {
+            logger.warn("Brutto Preis konnte nicht ermittelt werden");
+            return "";
+        }
+    }
+
     private String getVerpackungseinheitFromDetails() {
         try {
             final String xpath = "//*[contains(@class, 'ListLabel') and normalize-space(text())=\"Verpackungseinheit\"]/parent::tr";
             return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).findElement(By.className("ListText")).getText();
         } catch (final Exception e) {
             logger.warn("Verpackungseinheit konnte nicht ermittelt werden");
+            return "";
+        }
+    }
+
+    private String getGewichtFromDetails() {
+        try {
+            final String xpath = "//*[contains(@class, 'ListLabel') and normalize-space(text())=\"Gewicht\"]/parent::tr";
+            return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).findElement(By.className("ListDimension")).getText();
+        } catch (final Exception e) {
+            logger.warn("Gewicht konnte nicht ermittelt werden");
             return "";
         }
     }
@@ -235,7 +258,7 @@ public class PartInitializer extends PartInitializerBase {
 
     private String getOrgatopNummerFromDetails() {
         try {
-            final String xpath = "//*[contains(@class, 'ListLabel') and normalize-space(text())=\"ORGAtop\"]/parent::tr";
+            final String xpath = "//*[contains(@class, 'ListLabel') and normalize-space(text())=\"ORGATOP\"]/parent::tr";
             return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).findElement(By.className("ListText")).getText();
         } catch (final Exception e) {
             logger.warn("Orgatop Nummer konnte nicht ermittelt werden");
