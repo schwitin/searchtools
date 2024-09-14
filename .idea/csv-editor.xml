@@ -24,13 +24,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/output.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value=";" />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/output_andere.csv">
           <value>
             <Attribute>
