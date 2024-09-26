@@ -22,6 +22,10 @@ public class Part {
         this.partBedarfsmaenge = partBedarfsmaenge;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getPartNr() {
         return partNr;
     }

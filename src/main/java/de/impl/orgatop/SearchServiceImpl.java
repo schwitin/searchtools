@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.prefs.Preferences;
 
-public class SearchServiceImpl extends SearchServiceBase{
+public class SearchServiceImpl extends SearchServiceBase {
     Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     public SearchServiceImpl() throws IOException {
@@ -62,37 +62,55 @@ public class SearchServiceImpl extends SearchServiceBase{
         }
     }
 
-    private String mapToCsvRow(Part part){
+    private String mapToCsvRow(Part part) {
         Item original = part.getOtherItems().stream().filter(item -> item.getItemNumber().equals(part.getPartNr())).findFirst().orElse(null);
         Item compatible = part.getOtherItems().stream().filter(item -> item.getItemNumber().equals(part.getPartNr() + "M")).findFirst().orElse(null);
-        if (original == null && compatible == null) {
-            return null;
-        }else {
-            return mapToCsvColumns(original) + mapToCsvColumns(compatible);
-        }
-
+        return mapToCsvColumns(part, original, compatible);
     }
 
-    private String mapToCsvColumns(Item item){
-        if (item == null) {
-            return ";;;;";
-        }else{
-            StringBuilder result = new StringBuilder();
-            result.append(item.getItemNumber())
-                    .append(";")
-                    .append(item.getName())
-                    .append(";")
-                    .append(item.getPriceBrutto())
-                    .append(";")
-                    .append(item.getPriceNetto())
-                    .append(";")
-                    .append(item.getGewicht())
-                    .append(";");
-            return result.toString();
-        }
+    private String mapToCsvColumns(Part part, Item original, Item compatible) {
+        StringBuilder result = new StringBuilder();
+        result.append(part.getId()) // Pos.Nr.
+                .append(";")
+                .append(part.getPartNr()) // Gesucht Art. Nr.
+                .append(";")
+                .append(original == null ? "" : original.getItemNumber()) // Menke Art.Nr.
+                .append(";")
+                .append(part.getPartName()) // Bezeichnung IMPEX
+                .append(";")
+                .append(original == null ? "" : original.getName()) // Bezeichnung Menke
+                .append(";")
+                .append(original == null ? "" : original.getPriceNetto())
+                .append(";")
+                .append(original == null ? "" : original.getVerpackungseinheit())
+                .append(";")
+                .append(original == null ? "" : original.getGewicht())
+                .append(";")
+                .append(part.getPartBedarfsmaenge())
+                .append(";")
+                .append(original == null ? "" : original.getVerfuegbarkeit())
+                .append(";")
+                .append(compatible == null ? "" : compatible.getItemNumber()) // Menke Art.Nr.
+                .append(";")
+                .append(part.getPartName()) // Bezeichnung IMPEX
+                .append(";")
+                .append(compatible == null ? "" : compatible.getName()) // Bezeichnung Menke
+                .append(";")
+                .append(compatible == null ? "" : compatible.getPriceNetto())
+                .append(";")
+                .append(compatible == null ? "" : compatible.getVerpackungseinheit())
+                .append(";")
+                .append(compatible == null ? "" : compatible.getGewicht())
+                .append(";")
+                .append(part.getPartBedarfsmaenge())
+                .append(";")
+                .append(compatible == null ? "" : compatible.getVerfuegbarkeit())
+                .append(";");
+        return result.toString();
+
     }
 
     private String getHeader() {
-        return "Art.Nr.;Bezeichnung;Preis Brutto;Preis Netto;Gewicht;M-Art.Nr;Bezeichnung;Preis Brutto;Preis Netto;Gewicht";
+        return "Pos.Nr.;Gesucht Art.Nr.;Menke Art.Nr.;Bezeichnung IMPEX;Bezeichnung Menke;Preis Netto;VE (Verpackungseinheit);Gewicht;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Menke Art.Nr.;Bezeichnung IMPEX;Bezeichnung Menke;Preis Netto;VE (Verpackungseinheit);Gewicht;Bedarfsmenge IMPEX;Verfuegbarkeit, St;";
     }
 }
