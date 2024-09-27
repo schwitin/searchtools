@@ -35,7 +35,7 @@ SearchServiceImplTest {
         // 200310621
         // 9303450 9103250 kein Ergebnis
         // 2147690 mit detail
-        final Part part = new Part("myPartId", "2147690", "My_Name", "10");
+        final Part part = new Part("myPartId", "ED156", "My_Name", "10");
         // Part part = new Part("myPartId", "85030");
         parts.add(part);
         unitUnderTest.authenticate();

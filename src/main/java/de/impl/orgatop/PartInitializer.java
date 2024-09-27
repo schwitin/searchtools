@@ -19,7 +19,6 @@ public class PartInitializer extends PartInitializerBase {
     public static final int MAX_ITEMS_TO_INITIALIZE = 10;
     private final Logger logger = LoggerFactory.getLogger(PartInitializer.class);
 
-
     public PartInitializer(final WebDriver driver, final WebDriverWait wait) {
         super(driver, wait);
     }
@@ -51,7 +50,6 @@ public class PartInitializer extends PartInitializerBase {
     private boolean isSearchResultsAvailable() {
         try {
             wait.until(d -> !driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.className("odd")).isEmpty());
-            //Thread.sleep(500);
             return true;
         } catch (final Exception e) {
             return false;
@@ -71,17 +69,17 @@ public class PartInitializer extends PartInitializerBase {
     private List<Item> initializeItems(final Part part) {
         final List<WebElement> rows = driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.xpath("tr"));
         final List<Item> items = new ArrayList<>();
-        int i = 0;
+
         for (final WebElement row : rows) {
             final List<WebElement> columns = row.findElements(By.xpath("td"));
             if (columns.size() != 7) {
                 logger.error("Unerwartete Anzahl der Spalten in der Ergebnistabelle {}", columns.size());
                 continue;
             }
-            final Item item = initializeItemFromResultRow(columns);
+            final Item item = initializeItemFromResultRow(part, columns);
             item.setPart(part);
             items.add(item);
-            if (++i >= MAX_ITEMS_TO_INITIALIZE) {
+            if (items.size() >= MAX_ITEMS_TO_INITIALIZE) {
                 break;
             }
         }
@@ -89,7 +87,7 @@ public class PartInitializer extends PartInitializerBase {
         return items;
     }
 
-    private Item initializeItemFromResultRow(final List<WebElement> columns) {
+    private Item initializeItemFromResultRow(final Part part, final List<WebElement> columns) {
         final String partNummer = columns.get(2).getText().trim();
         final Item item = new Item(partNummer, null);
         final String partName = columns.get(3).getText().trim();
@@ -97,14 +95,18 @@ public class PartInitializer extends PartInitializerBase {
         item.setPriceNetto(getPriceNetto(columns.get(6)));
         item.setUrlToDetails(getLinkToDetails(columns.get(2)));
         item.setVerpackungseinheit(getVerpackungseiheit(columns.get(5)));
+        item.setVerfuegbarkeit(getVerfuegbarkeit(part, columns.get(5)));
 
+        logger.info("------------------");
         logger.info("Artikelnummer: {}", item.getItemNumber());
         logger.info("Bezeichnung: {}", item.getName());
         logger.info("Preis Netto: {}", item.getPriceNetto());
         logger.info("Verpackungseinheit: {}", item.getVerpackungseinheit());
+        logger.info("Verfügbarkeit: {}", item.getVerfuegbarkeit());
 
         return item;
     }
+
 
     private void initializeDetails(final List<Item> items) {
         for (final Item item : items) {
@@ -128,7 +130,6 @@ public class PartInitializer extends PartInitializerBase {
     }
 
     private void initializeDetailsForItem(final Item item) {
-        item.setVerfuegbarkeit(getVerfuegbarkeitFromDetails(item));
         item.setPriceNetto(getPreisNettoFromDetails());
         item.setPriceBrutto(getPreisBruttoFromDetails());
         item.setVerpackungseinheit(getVerpackungseinheitFromDetails());
@@ -139,7 +140,6 @@ public class PartInitializer extends PartInitializerBase {
 
         logger.info("----------Details zu {} -------------", item.getItemNumber());
         logger.info("Bezeichnung: {}", item.getName());
-        logger.info("Verfügbarkeit: {}", item.getVerfuegbarkeit());
         logger.info("Preis Netto: {}", item.getPriceNetto());
         logger.info("Preis Brutto: {}", item.getPriceBrutto());
         logger.info("Gewicht: {}", item.getGewicht());
@@ -188,22 +188,27 @@ public class PartInitializer extends PartInitializerBase {
         }
     }
 
-    private String getVerfuegbarkeitFromDetails(final Item item) {
+    private String getVerfuegbarkeit(Part part, WebElement columnQuickBoard) {
+        String bedarfsmaenge = part.getPartBedarfsmaenge();
+        if (bedarfsmaenge == null || bedarfsmaenge.isBlank()) {
+            bedarfsmaenge = "1";
+        }
         try {
-            final String bedarfsmaenge = item.getPart().getPartBedarfsmaenge();
-            if (bedarfsmaenge != null) {
-                final WebElement mengeInput = driver.findElement(By.id("properties")).findElement(By.name("quantity"));
-                mengeInput.sendKeys(bedarfsmaenge);
-            }
+            final WebElement mengeInput = wait.until(d -> columnQuickBoard.findElements(By.tagName("input")))
+                    .stream()
+                    .filter(el -> el.getAttribute("name").equals("quantity"))
+                    .findFirst().orElseThrow();
+            mengeInput.sendKeys("\u0008\u0008\u0008");
+            mengeInput.sendKeys(bedarfsmaenge);
 
-            driver.findElement(By.id("properties")).findElement(By.cssSelector("[alt=\"Verfügbarkeit\"]")).click();
+            wait.until(d -> columnQuickBoard.findElement(By.className("avalButton"))).click();
 
-            final String xpath = "//div[contains(@style,'availabilityGreen.png')] | //div[contains(@style,'availabilityYellow.png')] | //div[contains(@style,'availabilityGreenYellow.png')] | //div[contains(@style,'availabilityRed.png')]";
-            wait.until(d -> d.findElement(By.id("properties")).findElement(By.xpath(xpath)));
-            return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).getAttribute("title");
-        } catch (final Exception e) {
+            return wait.until(d -> columnQuickBoard.findElement(By.className("avalButton"))
+                    .findElement(By.xpath("//div[@title]"))).getAttribute("title");
+
+        } catch (Exception e) {
             logger.warn("Verfügbarkeit konnte nicht ermittelt werden");
-            return "unbekannt";
+            return "Manuel prüfen";
         }
     }
 

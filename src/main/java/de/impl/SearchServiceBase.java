@@ -46,7 +46,7 @@ public abstract class SearchServiceBase implements Closeable, de.api.SearchServi
             chromeOptions.addArguments("--remote-allow-origins=*");
         }
         driver = new ChromeDriver(chromeOptions);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1));
     }
 
     public void initParts(final List<Part> parts) {
