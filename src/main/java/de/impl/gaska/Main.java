@@ -7,15 +7,15 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
-    static String[] inputFiles = new String[]{"input_claas.csv", "input_andere.csv"};
+    final static String[] inputFiles = new String[]{"input_claas.csv", "input_andere.csv"};
 
 
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) {
         final Logger logger = LoggerFactory.getLogger(Main.class);
 
         for (final String inputFileName : inputFiles) {
@@ -41,8 +41,9 @@ public class Main {
         waitForEnterBeforeExit();
     }
 
-    private static void waitForEnterBeforeExit() throws IOException {
+    private static void waitForEnterBeforeExit() {
+        Scanner s = new Scanner(System.in);
         System.out.println("Bitte 2 Mal ENTER eingeben um das Programm zu beenden.");
-        System.in.read();
+        s.nextLine();
     }
 }

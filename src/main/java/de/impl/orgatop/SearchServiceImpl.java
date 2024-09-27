@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
-import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class SearchServiceImpl extends SearchServiceBase {
-    Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
+    private static final String HEADER = "Pos.Nr.;Gesucht Art.Nr.;Menke Art.Nr.;Bezeichnung IMPEX;Bezeichnung Menke;Preis Netto;VE (Verpackungseinheit);Gewicht;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Menke Art.Nr.;Bezeichnung IMPEX;Bezeichnung Menke;Preis Netto;VE (Verpackungseinheit);Gewicht;Bedarfsmenge IMPEX;Verfuegbarkeit, St;";
+    final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     public SearchServiceImpl() throws IOException {
         super();
@@ -28,6 +28,7 @@ public class SearchServiceImpl extends SearchServiceBase {
 
     @Override
     public void authenticate() throws IOException {
+        logger.info(">>> authenticate");
 
         final String settingsFilePath = System.getProperty("settings");
 
@@ -47,6 +48,7 @@ public class SearchServiceImpl extends SearchServiceBase {
         passwordElement.sendKeys(password);
         loginButton.click();
         driver.switchTo().defaultContent().switchTo().frame("innerFrame").switchTo().frame("catalog").switchTo().frame("content");
+        logger.info("<<< authenticate");
     }
 
     @Override
@@ -56,10 +58,12 @@ public class SearchServiceImpl extends SearchServiceBase {
 
     @Override
     public void render(final OutputStream outputStream, final List<Part> parts) {
+        logger.info(">>> render");
         try (final PrintStream printStream = new PrintStream(outputStream)) {
-            printStream.println(getHeader());
-            parts.stream().map(this::mapToCsvRow).filter(Objects::nonNull).forEach(printStream::println);
+            printStream.println(HEADER);
+            parts.stream().map(this::mapToCsvRow).forEach(printStream::println);
         }
+        logger.info("<<< render");
     }
 
     private String mapToCsvRow(Part part) {
@@ -69,48 +73,30 @@ public class SearchServiceImpl extends SearchServiceBase {
     }
 
     private String mapToCsvColumns(Part part, Item original, Item compatible) {
-        StringBuilder result = new StringBuilder();
-        result.append(part.getId()) // Pos.Nr.
-                .append(";")
-                .append(part.getPartNr()) // Gesucht Art. Nr.
-                .append(";")
-                .append(original == null ? "" : original.getItemNumber()) // Menke Art.Nr.
-                .append(";")
-                .append(part.getPartName()) // Bezeichnung IMPEX
-                .append(";")
-                .append(original == null ? "" : original.getName()) // Bezeichnung Menke
-                .append(";")
-                .append(original == null ? "" : original.getPriceNetto())
-                .append(";")
-                .append(original == null ? "" : original.getVerpackungseinheit())
-                .append(";")
-                .append(original == null ? "" : original.getGewicht())
-                .append(";")
-                .append(part.getPartBedarfsmaenge())
-                .append(";")
-                .append(original == null ? "" : original.getVerfuegbarkeit())
-                .append(";")
-                .append(compatible == null ? "" : compatible.getItemNumber()) // Menke Art.Nr.
-                .append(";")
-                .append(part.getPartName()) // Bezeichnung IMPEX
-                .append(";")
-                .append(compatible == null ? "" : compatible.getName()) // Bezeichnung Menke
-                .append(";")
-                .append(compatible == null ? "" : compatible.getPriceNetto())
-                .append(";")
-                .append(compatible == null ? "" : compatible.getVerpackungseinheit())
-                .append(";")
-                .append(compatible == null ? "" : compatible.getGewicht())
-                .append(";")
-                .append(part.getPartBedarfsmaenge())
-                .append(";")
-                .append(compatible == null ? "" : compatible.getVerfuegbarkeit())
-                .append(";");
-        return result.toString();
+        return part.getId() + // Pos.Nr.
+                ";" +
+                part.getPartNr() + // Gesucht Art. Nr.
+                ";" + mapToCsvColumns(part, original) + mapToCsvColumns(part, compatible);
+
 
     }
 
-    private String getHeader() {
-        return "Pos.Nr.;Gesucht Art.Nr.;Menke Art.Nr.;Bezeichnung IMPEX;Bezeichnung Menke;Preis Netto;VE (Verpackungseinheit);Gewicht;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Menke Art.Nr.;Bezeichnung IMPEX;Bezeichnung Menke;Preis Netto;VE (Verpackungseinheit);Gewicht;Bedarfsmenge IMPEX;Verfuegbarkeit, St;";
+    private String mapToCsvColumns(Part part, Item item){
+        return (item == null ? "" : item.getItemNumber()) + // Menke Art.Nr.
+                ";" +
+                part.getPartName() + // Bezeichnung IMPEX
+                ";" +
+                (item == null ? "" : item.getName()) + // Bezeichnung Menke
+                ";" +
+                (item == null ? "" : item.getPriceNetto()) +
+                ";" +
+                (item == null ? "" : item.getVerpackungseinheit()) +
+                ";" +
+                (item == null ? "" : item.getGewicht()) +
+                ";" +
+                part.getPartBedarfsmaenge() +
+                ";" +
+                (item == null ? "" : item.getVerfuegbarkeit()) +
+                ";";
     }
 }

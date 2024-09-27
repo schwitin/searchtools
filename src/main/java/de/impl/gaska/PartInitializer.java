@@ -23,7 +23,7 @@ public class PartInitializer extends PartInitializerBase {
 
     @Override
     public void initPart(final Part part) {
-        logger.info("Suche: " + part.getPartNr());
+        logger.info("Suche: {}", part.getPartNr());
         final String partNr = part.getPartNr();
         final String queryString = partNr.substring(0, partNr.length() - part.getSubstringLastCharsFromPartNrWhileSearch());
         final String targetStr = String.format("https://www.b2b.gaska.com.pl/de/k/alle-produkte-0?q=%s", queryString);
@@ -38,8 +38,8 @@ public class PartInitializer extends PartInitializerBase {
 
             logger.info("-----------------------");
 
-            logger.info("Part Nr: " + item.getItemNumber());
-            logger.info("Verpackungseinheit: " + item.getVerpackungseinheit());
+            logger.info("Part Nr: {}", item.getItemNumber());
+            logger.info("Verpackungseinheit: {}", item.getVerpackungseinheit());
             driver.get(item.getUrlToDetails());
             final String partName = this.getPartName();
             final String preisNetto = this.getPreisNetto();
@@ -76,7 +76,7 @@ public class PartInitializer extends PartInitializerBase {
     private String getPartName() {
         try {
             final String partName = driver.findElement(By.className("prd-v")).findElement(By.cssSelector("h1.name")).getText();
-            logger.info("Bezeichnung: " + partName);
+            logger.info("Bezeichnung: {}", partName);
             return partName;
         } catch (final Exception e) {
             logger.warn("Bezeichnung konnte nicht ermittelt werden.");
@@ -92,7 +92,7 @@ public class PartInitializer extends PartInitializerBase {
             driver.findElement(By.cssSelector("img.price-img")).click(); // Preis anzeigen
             wait.until(d -> d.findElement(By.cssSelector("div.price-hurt")).findElement(By.tagName("strong")).isDisplayed());
             final String preisNetto = driver.findElement(By.cssSelector("div.price-hurt")).findElement(By.tagName("strong")).getText();
-            logger.info("Preis Netto: " + preisNetto);
+            logger.info("Preis Netto: {}", preisNetto);
             return preisNetto;
         } catch (final Exception e) {
             logger.warn("Preis Netto konnte nicht ermittelt werden.");
@@ -117,22 +117,10 @@ public class PartInitializer extends PartInitializerBase {
                     ret.append(",");
                 }
             }
-            logger.info("OEM Nummern: " + ret.toString());
+            logger.info("OEM Nummern: {}", ret);
             return ret.toString();
         } catch (final Exception e) {
             logger.warn("OEM Nummern konnten nicht ermittelt werden.");
-            logger.debug(driver.getPageSource());
-            return "";
-        }
-    }
-
-    private String getVerpackungseinheit() {
-        try {
-            final String verpackungseiheit = "";
-            logger.info("Verpackungseiheit: " + verpackungseiheit);
-            return verpackungseiheit;
-        } catch (final Exception e) {
-            logger.warn("Verpackungseiheit konnte nicht ermittelt werden.");
             logger.debug(driver.getPageSource());
             return "";
         }
@@ -145,7 +133,7 @@ public class PartInitializer extends PartInitializerBase {
             wait.until(d -> d.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")));
             String verfuegbarkeit = driver.findElement(By.cssSelector("div.stock-cont")).findElement(By.tagName("span")).getText();
             verfuegbarkeit = this.shouldAddPlusToVerfuegbarkeit() ? "+" + verfuegbarkeit : verfuegbarkeit;
-            logger.info("Verfuegbarkeit: " + verfuegbarkeit);
+            logger.info("Verfuegbarkeit: {}", verfuegbarkeit);
             return verfuegbarkeit;
         } catch (final Exception e) {
             logger.warn("Verfügbarkeit konnte nicht ermittelt werden.");

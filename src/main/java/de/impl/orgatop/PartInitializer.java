@@ -27,7 +27,7 @@ public class PartInitializer extends PartInitializerBase {
     @Override
     public void initPart(final Part part) {
         search(part);
-        if (isSearchResultsAviable(part)) {
+        if (isSearchResultsAvailable()) {
             parseSearchResult(part);
         } else if (isOnDetails()) {
             final Item i = new Item("", null);
@@ -41,17 +41,17 @@ public class PartInitializer extends PartInitializerBase {
 
     private void search(final Part part) {
         final String partNr = part.getPartNr();
-        logger.info("Suche: " + partNr);
+        logger.info("Suche: {}", partNr);
         final WebElement searchField = driver.findElement(By.id("solrSearchTerm"));
         searchField.sendKeys(Keys.DELETE);
         searchField.sendKeys(partNr);
         searchField.sendKeys(Keys.RETURN);
     }
 
-    private boolean isSearchResultsAviable(final Part part) {
+    private boolean isSearchResultsAvailable() {
         try {
-            wait.until(d -> driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.className("odd")).size() > 0);
-            Thread.sleep(500);
+            wait.until(d -> !driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.className("odd")).isEmpty());
+            //Thread.sleep(500);
             return true;
         } catch (final Exception e) {
             return false;
@@ -61,7 +61,7 @@ public class PartInitializer extends PartInitializerBase {
     // Falls nur ein Orgatop-Ergebnis existiert so wird automatisch auf Details navigiert.
     // Hier wird Geprüft ob das der Fall ist.
     private boolean isOnDetails() {
-        return driver.findElements(By.id("properties")).size() > 0;
+        return !driver.findElements(By.id("properties")).isEmpty();
     }
 
     private void parseSearchResult(final Part part) {
@@ -128,7 +128,7 @@ public class PartInitializer extends PartInitializerBase {
     }
 
     private void initializeDetailsForItem(final Item item) {
-        item.setVerfuegbarkeit(getVerfügbarkeitFromDetails(item));
+        item.setVerfuegbarkeit(getVerfuegbarkeitFromDetails(item));
         item.setPriceNetto(getPreisNettoFromDetails());
         item.setPriceBrutto(getPreisBruttoFromDetails());
         item.setVerpackungseinheit(getVerpackungseinheitFromDetails());
@@ -138,12 +138,12 @@ public class PartInitializer extends PartInitializerBase {
         item.setGewicht(getGewichtFromDetails());
 
         logger.info("----------Details zu {} -------------", item.getItemNumber());
-        logger.info("Bezeichnung: " + item.getName());
-        logger.info("Verfügbarkeit: " + item.getVerfuegbarkeit());
-        logger.info("Preis Netto: " + item.getPriceNetto());
-        logger.info("Preis Brutto: " + item.getPriceBrutto());
-        logger.info("Gewicht: " + item.getGewicht());
-        logger.info("Verpackungseinheit: " + item.getVerpackungseinheit());
+        logger.info("Bezeichnung: {}", item.getName());
+        logger.info("Verfügbarkeit: {}", item.getVerfuegbarkeit());
+        logger.info("Preis Netto: {}", item.getPriceNetto());
+        logger.info("Preis Brutto: {}", item.getPriceBrutto());
+        logger.info("Gewicht: {}", item.getGewicht());
+        logger.info("Verpackungseinheit: {}", item.getVerpackungseinheit());
     }
 
     private void navigateToDetails(final String urlToDetails) {
@@ -155,12 +155,12 @@ public class PartInitializer extends PartInitializerBase {
     private void navigateBackToSearchResults() {
         driver.navigate().back();
         driver.switchTo().defaultContent().switchTo().frame("innerFrame").switchTo().frame("catalog").switchTo().frame("content");
-        wait.until(d -> driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.className("odd")).size() > 0);
+        wait.until(d -> !driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.className("odd")).isEmpty());
     }
 
     private String getPriceNetto(final WebElement columnWithPrice) {
         try {
-            final boolean isPreisanfrage = columnWithPrice.findElements(By.linkText("Preisanfrage")).size() > 0;
+            final boolean isPreisanfrage = !columnWithPrice.findElements(By.linkText("Preisanfrage")).isEmpty();
             return isPreisanfrage ? "Preisanfrage" : columnWithPrice.findElement(By.tagName("span")).findElement(By.tagName("b")).getText();
         } catch (final Exception e) {
             logger.warn("Preis Netto konnte nicht ermittelt werden (Tabelle)");
@@ -188,7 +188,7 @@ public class PartInitializer extends PartInitializerBase {
         }
     }
 
-    private String getVerfügbarkeitFromDetails(final Item item) {
+    private String getVerfuegbarkeitFromDetails(final Item item) {
         try {
             final String bedarfsmaenge = item.getPart().getPartBedarfsmaenge();
             if (bedarfsmaenge != null) {
@@ -200,8 +200,7 @@ public class PartInitializer extends PartInitializerBase {
 
             final String xpath = "//div[contains(@style,'availabilityGreen.png')] | //div[contains(@style,'availabilityYellow.png')] | //div[contains(@style,'availabilityGreenYellow.png')] | //div[contains(@style,'availabilityRed.png')]";
             wait.until(d -> d.findElement(By.id("properties")).findElement(By.xpath(xpath)));
-            final String verfuegbarkeitStr = driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).getAttribute("title");
-            return verfuegbarkeitStr;
+            return driver.findElement(By.id("properties")).findElement(By.xpath(xpath)).getAttribute("title");
         } catch (final Exception e) {
             logger.warn("Verfügbarkeit konnte nicht ermittelt werden");
             return "unbekannt";

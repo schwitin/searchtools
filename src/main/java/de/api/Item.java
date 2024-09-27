@@ -2,7 +2,7 @@ package de.api;
 
 
 public class Item {
-    String itemNumber = "";
+    String itemNumber;
     String name = "";
     String priceNetto = "";
     String priceBrutto = "";
@@ -140,27 +140,21 @@ public class Item {
 
     @Override
     public String toString() {
-        final StringBuilder str = new StringBuilder();
-        str.append(this.getItemNumber());
-        str.append(";");
-        str.append(this.part.getPartName()); // Bezechnung IMPEX
-        str.append(";");
-        str.append(this.getName());
-        str.append(";");
-        str.append(this.part.getPartBedarfsmaenge());
-        str.append(";");
-        str.append(this.getVerfuegbarkeit());
-        str.append(";");
-        str.append(this.getPriceNetto());
-        str.append(";");
-        str.append(this.getVerpackungseinheit());
-        str.append(";");
-        str.append(this.getOemNummern());
-        return str.toString();
-    }
-
-    public static String getHeader() {
-        return "Pos. Nr.;Gesucht Art.Nr.;Gaska Art.Nr.;Bezeichnung IMPEX;Bezeichnung Gaska;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Grosshandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
+        return this.getItemNumber() +
+                ";" +
+                this.part.getPartName() + // Bezechnung IMPEX
+                ";" +
+                this.getName() +
+                ";" +
+                this.part.getPartBedarfsmaenge() +
+                ";" +
+                this.getVerfuegbarkeit() +
+                ";" +
+                this.getPriceNetto() +
+                ";" +
+                this.getVerpackungseinheit() +
+                ";" +
+                this.getOemNummern();
     }
 
 }

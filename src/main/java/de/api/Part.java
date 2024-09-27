@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Part {
-    String id = "";
-
-
-    String partNr = "";
-    String partName = "";
-    String partBedarfsmaenge = "";
-    int substringLastCharsFromPartNrWhileSearch = 0;
-
-
+    final String id;
+    String partNr;
+    final String partName;
+    final String partBedarfsmaenge;
+    final int substringLastCharsFromPartNrWhileSearch = 0;
     List<Item> otherItems = new ArrayList<>();
 
     public Part(final String id, final String partNr, final String partName, final String partBedarfsmaenge) {
@@ -46,10 +42,6 @@ public class Part {
         return substringLastCharsFromPartNrWhileSearch;
     }
 
-    public void setSubstringLastCharsFromPartNrWhileSearch(final int substringLastCharsFromPartNrWhileSearch) {
-        this.substringLastCharsFromPartNrWhileSearch = substringLastCharsFromPartNrWhileSearch;
-    }
-
     public void setOtherItems(final List<Item> otherItems) {
         this.otherItems = otherItems;
         this.otherItems.forEach(i -> i.setPart(this));
@@ -61,7 +53,7 @@ public class Part {
 
     @Override
     public String toString() {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append(this.id);
         buffer.append(";");
         buffer.append(this.partNr);
@@ -70,12 +62,12 @@ public class Part {
         for (final Item item : otherItems) {
 
             if (i == 0)
-                buffer.append(";" + item);
+                buffer.append(";").append(item);
             else
-                buffer.append(";;" + item);
+                buffer.append(";;").append(item);
 
             if (i != otherItems.size() - 1) {
-                buffer.append(System.getProperty("line.separator"));
+                buffer.append(System.lineSeparator());
             }
             i++;
 

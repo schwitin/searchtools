@@ -1,6 +1,5 @@
 package de.impl;
 
-import de.api.Item;
 import de.api.Part;
 import de.api.Renderer;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -13,7 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.prefs.Preferences;

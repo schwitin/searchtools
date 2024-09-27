@@ -6,13 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(final String[] args) throws IOException {
+    public static void main(final String[] args) {
         final Logger logger = LoggerFactory.getLogger(Main.class);
         final File inputFile = new File("input.csv");
         if (!inputFile.exists()) {
@@ -37,9 +37,10 @@ public class Main {
 
     }
 
-    private static void waitForEnterBeforeExit() throws IOException {
+    private static void waitForEnterBeforeExit() {
+        Scanner s = new Scanner(System.in);
         System.out.println("Bitte 2 Mal ENTER eingeben um das Programm zu beenden.");
-        System.in.read();
+        s.nextLine();
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class CsvImporter {
 
     public List<Part> importCsv(final File inputFile) throws IOException {
-        final List<de.api.Part> parts = new ArrayList<Part>();
+        final List<Part> parts = new ArrayList<>();
         final Reader in = new FileReader(inputFile);
         final Iterable<CSVRecord> records = CSVFormat.RFC4180
                 .builder()

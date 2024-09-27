@@ -1,6 +1,5 @@
 package de.impl.gaska;
 
-import de.api.Item;
 import de.api.Part;
 import de.impl.PartInitializerBase;
 import de.impl.SearchServiceBase;
@@ -20,6 +19,7 @@ import java.util.prefs.Preferences;
 
 public class SearchServiceImpl extends SearchServiceBase {
 
+    private static final String HEADER = "Pos. Nr.;Gesucht Art.Nr.;Gaska Art.Nr.;Bezeichnung IMPEX;Bezeichnung Gaska;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Grosshandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
     private final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     public SearchServiceImpl() throws IOException {
@@ -29,7 +29,7 @@ public class SearchServiceImpl extends SearchServiceBase {
 
     @Override
     public void authenticate() throws IOException {
-
+        logger.info(">>> authenticate");
         final String settingsFilePath = System.getProperty("settings");
 
         final Ini ini = new Ini(new File(settingsFilePath == null ? "settings.ini" : settingsFilePath));
@@ -50,26 +50,19 @@ public class SearchServiceImpl extends SearchServiceBase {
         passwordElement.sendKeys(password);
         // Thread.sleep(10000);
         loginButton.click();
+        logger.info("<<< authenticate");
     }
 
     @Override
     public void render(final OutputStream outputStream, final List<Part> parts){
+        logger.info(">>> render");
         try (final PrintStream printStream = new PrintStream(outputStream)) {
-            printStream.println(getHeader());
+            printStream.println(HEADER);
             for (final Part part : parts) {
                 printStream.println(part);
             }
         }
-    }
-
-    private String getHeader() {
-        return "Pos. Nr.;Gesucht Art.Nr.;Gaska Art.Nr.;Bezeichnung IMPEX;Bezeichnung Gaska;Bedarfsmenge IMPEX;Verfuegbarkeit, St;Grosshandelspreis, Netto;Verpackungseinheit;OEM Nummern (Ersatz-Nr.)";
-    }
-
-    @Override
-    public void close() {
-        driver.close();
-        driver.quit();
+        logger.info("<<< render");
     }
 
     @Override
