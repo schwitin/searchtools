@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PartInitializer extends PartInitializerBase {
 
     public static final int MAX_ITEMS_TO_INITIALIZE = 10;
+    public static final String STR_MANUEL_PRUEFEN = "Manuel prüfen";
     private final Logger logger = LoggerFactory.getLogger(PartInitializer.class);
 
     public PartInitializer(final WebDriver driver, final WebDriverWait wait) {
@@ -63,12 +63,11 @@ public class PartInitializer extends PartInitializerBase {
     }
 
     private void parseSearchResult(final Part part) {
-        part.setOtherItems(this.initializeItems(part));
+        this.initializeItems(part);
     }
 
-    private List<Item> initializeItems(final Part part) {
+    private void initializeItems(final Part part) {
         final List<WebElement> rows = driver.findElement(By.id("searchResultTbl")).findElement(By.tagName("tbody")).findElements(By.xpath("tr"));
-        final List<Item> items = new ArrayList<>();
 
         for (final WebElement row : rows) {
             final List<WebElement> columns = row.findElements(By.xpath("td"));
@@ -76,20 +75,20 @@ public class PartInitializer extends PartInitializerBase {
                 logger.error("Unerwartete Anzahl der Spalten in der Ergebnistabelle {}", columns.size());
                 continue;
             }
-            final Item item = initializeItemFromResultRow(part, columns);
-            item.setPart(part);
-            items.add(item);
-            if (items.size() >= MAX_ITEMS_TO_INITIALIZE) {
+            initializeItemFromResultRow(part, columns);
+            if (part.getOtherItems().size() >= MAX_ITEMS_TO_INITIALIZE) {
                 break;
             }
         }
-        initializeDetails(items);
-        return items;
+        initializeDetails(part);
     }
 
-    private Item initializeItemFromResultRow(final Part part, final List<WebElement> columns) {
+    private void initializeItemFromResultRow(final Part part, final List<WebElement> columns) {
         final String partNummer = columns.get(2).getText().trim();
         final Item item = new Item(partNummer, null);
+        item.setPart(part);
+        part.getOtherItems().add(item);
+
         final String partName = columns.get(3).getText().trim();
         item.setName(partName);
         item.setPriceNetto(getPriceNetto(columns.get(6)));
@@ -103,17 +102,14 @@ public class PartInitializer extends PartInitializerBase {
         logger.info("Preis Netto: {}", item.getPriceNetto());
         logger.info("Verpackungseinheit: {}", item.getVerpackungseinheit());
         logger.info("Verfügbarkeit: {}", item.getVerfuegbarkeit());
-
-        return item;
     }
 
+    private void initializeDetails(final Part part) {
+        part.getOtherItems()
+                .stream()
+                .filter(it -> it.getUrlToDetails() != null).
+                forEach(this::navigateToDetailsAndInitializeDetailsForItem);
 
-    private void initializeDetails(final List<Item> items) {
-        for (final Item item : items) {
-            if (item.getUrlToDetails() != null) {
-                navigateToDetailsAndInitializeDetailsForItem(item);
-            }
-        }
     }
 
     private void navigateToDetailsAndInitializeDetailsForItem(final Item item) {
@@ -138,12 +134,17 @@ public class PartInitializer extends PartInitializerBase {
         item.setName(getBezeichnungFromDetails());
         item.setGewicht(getGewichtFromDetails());
 
+        if (item.getVerfuegbarkeit() == null || item.getVerfuegbarkeit().isBlank() || item.getVerfuegbarkeit().equals(STR_MANUEL_PRUEFEN)){
+            item.setVerfuegbarkeit(getVerfuegbarkeitFromDetails(item));
+        }
+
         logger.info("----------Details zu {} -------------", item.getItemNumber());
         logger.info("Bezeichnung: {}", item.getName());
         logger.info("Preis Netto: {}", item.getPriceNetto());
         logger.info("Preis Brutto: {}", item.getPriceBrutto());
         logger.info("Gewicht: {}", item.getGewicht());
         logger.info("Verpackungseinheit: {}", item.getVerpackungseinheit());
+        logger.info("Verfügbarkeit: {}", item.getVerfuegbarkeit());
     }
 
     private void navigateToDetails(final String urlToDetails) {
@@ -208,7 +209,26 @@ public class PartInitializer extends PartInitializerBase {
 
         } catch (Exception e) {
             logger.warn("Verfügbarkeit konnte nicht ermittelt werden");
-            return "Manuel prüfen";
+            return STR_MANUEL_PRUEFEN;
+        }
+    }
+
+    private String getVerfuegbarkeitFromDetails(final Item item) {
+        String bedarfsmaenge = item.getPart().getPartBedarfsmaenge();
+        if (bedarfsmaenge == null || bedarfsmaenge.isBlank()) {
+            bedarfsmaenge = "1";
+        }
+        try {
+            final WebElement mengeInput = driver.findElement(By.id("properties")).findElement(By.name("quantity"));
+            mengeInput.sendKeys("\u0008\u0008\u0008");
+            mengeInput.sendKeys(bedarfsmaenge);
+
+            wait.until(d -> d.findElement(By.id("properties")).findElement(By.cssSelector("[alt=\"Verfügbarkeit\"]"))).click();
+            final String xpath = "//div[contains(@style,'availabilityGreen.png')] | //div[contains(@style,'availabilityYellow.png')] | //div[contains(@style,'availabilityGreenYellow.png')] | //div[contains(@style,'availabilityRed.png')]";
+            return wait.until(d -> d.findElement(By.id("properties")).findElement(By.xpath(xpath))).getAttribute("title");
+        } catch (final Exception e) {
+            logger.warn("Verfügbarkeit konnte nicht ermittelt werden");
+            return STR_MANUEL_PRUEFEN;
         }
     }
 

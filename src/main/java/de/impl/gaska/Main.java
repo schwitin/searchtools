@@ -43,7 +43,7 @@ public class Main {
 
     private static void waitForEnterBeforeExit() {
         Scanner s = new Scanner(System.in);
-        System.out.println("Bitte 2 Mal ENTER eingeben um das Programm zu beenden.");
+        System.out.println("Bitte ENTER eingeben um das Programm zu beenden.");
         s.nextLine();
     }
 }
